@@ -2,11 +2,12 @@
 import React, { useState } from 'react';
 import {Container, CssBaseline, Avatar, Typography, FormControlLabel, 
     Button, Checkbox, Grid, Link, makeStyles, Card, CardContent} from '@material-ui/core';
-import {LockRounded} from '@material-ui/icons';
+//import {Height, LockRounded} from '@material-ui/icons';
 import {ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
 import fire from '../helpers/db';
 import {ToastContainer, toast} from 'react-toastify';
 import {ScaleLoader} from 'react-spinners';
+import Logo from "../images/adminlogo.PNG"
 
 
 const Login = (props) => {
@@ -24,6 +25,7 @@ const Login = (props) => {
     `;
 
 
+    //setting const values onchange
     const handleEmail= (event) =>{
         setEmail(event.target.value);
     }
@@ -35,7 +37,7 @@ const Login = (props) => {
     const handleCheck = (event) => {
         setRememberMe(event.target.checked);
     }
-
+    ///////////////////////////////////////////////////
 
     const handlerLogin = () => {
         setLoading(true);
@@ -60,17 +62,17 @@ const Login = (props) => {
     }
 
     return (
-        <Container component="main" maxWidth="xs">
+        <Container component="main" maxWidth="xs" style={{ height: '100%', width:'100%' }}>
             <Card className={classes.card}>
                 <CardContent>
                     <ToastContainer/>
                     <CssBaseline/>
                     <div className={classes.paper}>
-                        <Avatar className={classes.avatar}>
-                            <LockRounded/>
-                        </Avatar>
+                        
+                           <img src={Logo} alt="logo" className={classes.avatar}/>
+                      
                         <Typography component="h1" variant="h5">
-                            Sign In
+                            Resto Panel
                         </Typography>
                         <ValidatorForm 
                             onSubmit={handlerLogin}
@@ -129,7 +131,13 @@ const Login = (props) => {
                                     <Link  onClick={props.toggle} className={classes.pointer} variant="body2">
                                         {"Don't have an account? Sign Up"}
                                     </Link>
+                                    <br></br>
+                                    <Link  onClick={props.toggle} className={classes.pointer} variant="body2">
+                                        {"forgot password"}
+                                    </Link>
+                                    
                                 </Grid>
+                                
                             </Grid>
                         </ValidatorForm>
                     </div>
@@ -147,8 +155,10 @@ const useStyles = makeStyles((theme) => ({
         alignItems: 'center',
       },
       avatar: {
-        margin: theme.spacing(1),
-        backgroundColor: theme.palette.secondary.main,
+        width:'40%',
+        height:'40%',
+        marginBottom:20
+        
       },
       form: {
         width: '100%', // Fix IE 11 issue.
@@ -157,7 +167,8 @@ const useStyles = makeStyles((theme) => ({
       submit: {
           background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
           margin: theme.spacing(3, 0, 2),
-          color: '#fff'
+          color: '#fff',
+          borderRadius: 50
       },
       card: {
           marginTop: '60px',
@@ -167,7 +178,7 @@ const useStyles = makeStyles((theme) => ({
       },
       pointer: {
           cursor: 'pointer',
-          color: 'red'
+          color: 'black'
       }
 }));
 export default Login;
