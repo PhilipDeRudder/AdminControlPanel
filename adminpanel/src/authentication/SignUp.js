@@ -33,6 +33,7 @@ const SignUp = (props) => {
                     toast.success('User Registered Successfully');
                 }
             }).catch((error) => {
+                // eslint-disable-next-line default-case
                 switch (error.code) {
                     case 'auth/email-already-in-use':
                         toast.error(error.message);
@@ -163,7 +164,7 @@ const useStyles = makeStyles((theme) => ({
       },
       pointer: {
           cursor: 'pointer',
-          color: 'red'
+          color: 'black'
       }
 }))
 export default SignUp;
