@@ -27,7 +27,7 @@ const SignUp = (props) => {
 
 
     const createUserInFirestore = (_email, _restaurantName, _fullname) => {
-        db.collection("Users").doc(currentuser.uid).set({
+        db.collection("Users").doc(fire.auth().currentUser.uid).set({
             _email,_restaurantName, _fullname
         });
 
