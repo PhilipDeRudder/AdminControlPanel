@@ -9,7 +9,8 @@ import fire from '../helpers/db';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Logo from "../images/adminlogo.PNG"
-
+import app from "firebase/app";
+import "firebase/firestore"
 
 
 const SignUp = (props) => {
@@ -19,6 +20,18 @@ const SignUp = (props) => {
     const [confirmPassword, setConfirmPassword] = useState('');
     const [restaurantname, setRestaurantname] = useState('');
     const [fullname, setFullname] = useState('');
+
+    const currentuser = fire.auth().currentUser;
+    const db = app.firestore();
+    
+
+
+    const createUserInFirestore = (_email, _restaurantName, _fullname) => {
+        db.collection("Users").doc(fire.auth().currentUser.uid).set({
+            _email,_restaurantName, _fullname
+        });
+
+    }
 
     const handleEmail = (event) => {
         setEmail(event.target.value);
@@ -45,8 +58,7 @@ const SignUp = (props) => {
                 if (response) {
                     props.toggle();
                     toast.success('User Registered Successfully');
-
-
+                    createUserInFirestore(email,restaurantname, fullname, currentuser.uid)
                     // write users ID into the firestore 
                 }
             }).catch((error) => {
