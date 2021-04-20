@@ -8,9 +8,9 @@ import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import fire from '../helpers/db';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Logo from "../images/adminlogo.PNG"
+import Logo from "../images/adminlogo.png"
 import app from "firebase/app";
-import "firebase/firestore"
+import "firebase/firestore";
 
 
 const SignUp = (props) => {
