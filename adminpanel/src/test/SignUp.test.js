@@ -10,8 +10,9 @@ configure({
    adapter: new Adapter()
 });
 describe("Testin <SignUp/> Component", () => {
-   it("App renders a message", () => {
-      const wrapper = shallow(<SignUp />);
+   it("test if function is called onclick", () => {
+      
+      const wrapper = shallow(<SignUp/>)
    });
    chai.use(chaiEnzyme());
 });
