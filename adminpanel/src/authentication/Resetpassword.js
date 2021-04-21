@@ -49,32 +49,15 @@ export default function Resetpassword(props) {
             .then(function () {
                 alert('Please check your email...')
                 setLoading(false);
+                setEmail('');
             }).catch(function (e) {
                 console.log(e)
-            });
-    }
-
-    const handlerLogin = () => {
-        setLoading(true);
-        fire.auth()
-            .signInWithEmailAndPassword(email, password)
-            .then(response => {
-                const { user } = response;
-                const data = {
-                    userId: user.uid,
-                    email: user.email
-                }
-                localStorage.setItem('user', JSON.stringify(data));
-                const storage = localStorage.getItem('user');
-                const loggedInUser = storage !== null ? JSON.parse(storage) : null;
-                props.loggedIn(loggedInUser);
-                setLoading(false);
-            }).catch(error => {
                 toast.error(error.message);
                 setLoading(false);
             });
-
     }
+
+
 
     return (
         <Container component="main" maxWidth="xs" style={{ height: '100%', width: '100%' }}>
