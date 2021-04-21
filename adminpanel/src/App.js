@@ -4,6 +4,7 @@ import './App.css';
 import NavBar from './layouts/NavBar';
 import Login from './authentication/Login';
 import SignUp from './authentication/SignUp';
+import Resetpassword from './authentication/Resetpassword';
 
 function App() {
   const [user, setUser] = useState('');
@@ -28,7 +29,7 @@ function App() {
     ) : (
        <>
        {toggleForm ? (<Login loggedIn={(user) => setUser(user)} toggle={() => formMode()}/>) 
-       : ( <SignUp toggle={() => formMode()}/>)}
+       : ( <Resetpassword toggle={() => formMode()}/>)}
       
    </>
     )} 
