@@ -7,7 +7,12 @@ import {ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
 import fire from '../helpers/db';
 import {ToastContainer, toast} from 'react-toastify';
 import {ScaleLoader} from 'react-spinners';
-import Logo from "../images/adminlogo.png"
+import Logo from "../images/adminlogo.PNG";
+import { InputAdornment } from "@material-ui/core";
+import { AiFillMail } from "react-icons/ai";
+import { AiFillLock } from "react-icons/ai";
+
+
 
 
 export default function Login (props)  {
@@ -99,21 +104,38 @@ export default function Login (props)  {
                                 }
                                 }}
                                 className={classes.form}>
-                        <TextValidator
+                        <TextValidator 
                          variant="outlined"
                          margin="normal"
                          fullWidth
                          label="Email"
+                         InputProps={{
+                            startAdornment: (
+                              <InputAdornment position="start">
+                                <AiFillMail />
+                              </InputAdornment>
+                            ),
+                          }}
+
                          onChange={handleEmail}
                          name="email"
+                         
                          value={email}
                          validators={['required', 'isEmail']}
                          errorMessages={['this field is required', 'email is not valid']}
                          autoComplete='off' />
+
                           <TextValidator
                                 variant="outlined"
                                 fullWidth
                                 label="Password"
+                                InputProps={{
+                                    startAdornment: (
+                                      <InputAdornment position="start">
+                                        <AiFillLock />
+                                      </InputAdornment>
+                                    ),
+                                  }}
                                 onChange={handlePassword}
                                 name="password"
                                 type="password"
@@ -148,11 +170,11 @@ export default function Login (props)  {
                             <Grid container>
                                 <Grid item>
                                     <Link  onClick={props.toggle} className={classes.pointer} variant="body2">
-                                        {"Don't have an account? Sign Up"}
+                                        {"Don't have an account? Create an account"}
                                     </Link>
                                     <br></br>
                                     <Link  onClick={props.toggle} className={classes.pointer} variant="body2">
-                                        {"forgot password"}
+                                        {"Forgot password"}
                                     </Link>
                                     
                                 </Grid>
@@ -172,6 +194,7 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
+        color: '#b89c84',
       },
       avatar: {
         width:'40%',
@@ -184,7 +207,7 @@ const useStyles = makeStyles((theme) => ({
         marginTop: theme.spacing(1),
       },
       submit: {
-          background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
+          background: 'linear-gradient(45deg, #b89c84 30%, #b89c84 90%)',
           margin: theme.spacing(3, 0, 2),
           color: '#fff',
           borderRadius: 50

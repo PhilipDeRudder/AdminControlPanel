@@ -8,9 +8,14 @@ import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import fire from '../helpers/db';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Logo from "../images/adminlogo.png"
+import Logo from "../images/adminlogo.PNG";
 import app from "firebase/app";
 import "firebase/firestore";
+import { InputAdornment } from "@material-ui/core";
+import { FaUserAlt } from "react-icons/fa";
+import { AiFillMail } from "react-icons/ai";
+import { AiFillLock } from "react-icons/ai";
+import { MdRestaurant } from "react-icons/md";
 
 
 export default function SignUp (props) {
@@ -99,7 +104,7 @@ export default function SignUp (props) {
                     <img src={Logo} alt="logo" className={classes.avatar}/>
 
                         <Typography component="h1" variant="h5">
-                            Sign Up
+                            Register
                         </Typography>
                         <ValidatorForm
                             onSubmit={handleSignUp}
@@ -109,6 +114,14 @@ export default function SignUp (props) {
                                 margin="normal"
                                 fullWidth
                                 label="Full name"
+                                InputProps={{
+                                    startAdornment: (
+                                      <InputAdornment position="start">
+                                        <FaUserAlt />
+                                      </InputAdornment>
+                                    ),
+                                  }}
+
                                 onChange={handleFullname}
                                 name="Full name"
                                 value={fullname}
@@ -122,6 +135,13 @@ export default function SignUp (props) {
                                 margin="normal"
                                 fullWidth
                                 label="Email"
+                                InputProps={{
+                                    startAdornment: (
+                                      <InputAdornment position="start">
+                                        <AiFillMail />
+                                      </InputAdornment>
+                                    ),
+                                  }}
                                 onChange={handleEmail}
                                 name="email"
                                 value={email}
@@ -135,6 +155,13 @@ export default function SignUp (props) {
                                 margin="normal"
                                 fullWidth
                                 label="Restaurant name"
+                                InputProps={{
+                                    startAdornment: (
+                                      <InputAdornment position="start">
+                                        <MdRestaurant />
+                                      </InputAdornment>
+                                    ),
+                                  }}
                                 onChange={handleRestaurantName}
                                 name="Restaurant name"
                                 value={restaurantname}
@@ -147,6 +174,13 @@ export default function SignUp (props) {
                                 variant="outlined"
                                 fullWidth
                                 label="Password"
+                                InputProps={{
+                                    startAdornment: (
+                                      <InputAdornment position="start">
+                                        <AiFillLock />
+                                      </InputAdornment>
+                                    ),
+                                  }}
                                 onChange={handlePassword}
                                 name="password"
                                 type="password"
@@ -159,6 +193,13 @@ export default function SignUp (props) {
                             <TextValidator
                                 variant="outlined"
                                 label="Confirm password"
+                                InputProps={{
+                                    startAdornment: (
+                                      <InputAdornment position="start">
+                                        <AiFillLock />
+                                      </InputAdornment>
+                                    ),
+                                  }}
                                 fullWidth
                                 onChange={handleConfirmPassowerd}
                                 name="confirmPassword"
@@ -197,6 +238,7 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
+        color: '#b89c84'
     },
     avatar: {
         width:'40%',
@@ -209,7 +251,7 @@ const useStyles = makeStyles((theme) => ({
         marginTop: theme.spacing(1),
     },
     submit: {
-        background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
+        background: 'linear-gradient(45deg, #b89c84 30%, #b89c84 90%)',
         margin: theme.spacing(3, 0, 2),
         color: '#fff',
         borderRadius: 50
