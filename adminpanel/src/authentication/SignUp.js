@@ -215,7 +215,7 @@ export default function SignUp (props) {
                                 variant="contained"
                                 className={classes.submit}
                             >
-                                <p>Sign Up</p>
+                                <p>Create Account</p>
                             </Button>
                             <Grid container>
                                 <Grid item>
