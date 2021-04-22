@@ -7,16 +7,31 @@ import {ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
 import fire from '../helpers/db';
 import {ToastContainer, toast} from 'react-toastify';
 import {ScaleLoader} from 'react-spinners';
-import Logo from "../images/adminlogo.PNG"
+import Logo from "../images/adminlogo.png"
 
 
-const Login = (props) => {
+export default function Login (props)  {
     const classes = useStyles();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [rememberme, setRememberMe] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [isLoginDisabled, setIsLoginDisabled] = useState(true);
 
+
+  
+    const validateEmail = text => /@/.test(text);
+
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    const validateForm = () => {
+        setIsLoginDisabled(password.length < 8 || !validateEmail(email));
+      }
+
+      
+    React.useEffect(() => {
+        validateForm();
+      }, [email, password, validateForm]);
     
     const override = `
         display: block;
@@ -34,10 +49,12 @@ const Login = (props) => {
         setPassword(event.target.value);
     }
 
+
+    
+
     const handleCheck = (event) => {
         setRememberMe(event.target.checked);
     }
-    ///////////////////////////////////////////////////
 
     const handlerLogin = () => {
         setLoading(true);
@@ -121,6 +138,8 @@ const Login = (props) => {
                              fullWidth
                              variant="contained"
                              className={classes.submit}
+                             disabled={isLoginDisabled}
+
                          >
                              Sign In
                          </Button>
@@ -181,4 +200,3 @@ const useStyles = makeStyles((theme) => ({
           color: 'black'
       }
 }));
-export default Login;

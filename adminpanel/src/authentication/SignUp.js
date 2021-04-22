@@ -8,12 +8,12 @@ import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import fire from '../helpers/db';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Logo from "../images/adminlogo.PNG"
+import Logo from "../images/adminlogo.png"
 import app from "firebase/app";
-import "firebase/firestore"
+import "firebase/firestore";
 
 
-const SignUp = (props) => {
+export default function SignUp (props) {
     const classes = useStyles();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -88,6 +88,7 @@ const SignUp = (props) => {
             ValidatorForm.removeValidationRule('isPasswordMatch');
         }
     }, [password])
+
     return (
         <Container component="main" maxWidth="xs">
             <Card className={classes.card}>
@@ -173,7 +174,7 @@ const SignUp = (props) => {
                                 variant="contained"
                                 className={classes.submit}
                             >
-                                Sign Up
+                                <p>Sign Up</p>
                             </Button>
                             <Grid container>
                                 <Grid item>
@@ -225,4 +226,3 @@ const useStyles = makeStyles((theme) => ({
         color: 'black'
     }
 }))
-export default SignUp;
