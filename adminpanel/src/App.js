@@ -5,6 +5,8 @@ import NavBar from './layouts/NavBar';
 import Login from './authentication/Login';
 import SignUp from './authentication/SignUp';
 import Resetpassword from './authentication/Resetpassword';
+import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
+
 
 function App() {
   const [user, setUser] = useState('');
@@ -28,8 +30,7 @@ function App() {
       </>
     ) : (
        <>
-       {toggleForm ? (<Login loggedIn={(user) => setUser(user)} toggle={() => formMode()}/>) 
-       : ( <Resetpassword toggle={() => formMode()}/>)}
+       <Login loggedIn={(user) => setUser(user)} toggle={() => formMode()}/>
       
    </>
     )} 
