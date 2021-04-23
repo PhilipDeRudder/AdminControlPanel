@@ -7,7 +7,7 @@ import {ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
 import fire from '../helpers/db';
 import {ToastContainer, toast} from 'react-toastify';
 import {ScaleLoader} from 'react-spinners';
-import Logo from "../images/adminlogo.PNG";
+import Logo from "../images/adminlogo.png";
 import { InputAdornment } from "@material-ui/core";
 import { AiFillMail } from "react-icons/ai";
 import { AiFillLock } from "react-icons/ai";
