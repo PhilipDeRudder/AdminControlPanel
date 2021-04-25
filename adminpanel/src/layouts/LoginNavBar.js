@@ -6,19 +6,20 @@ const loginNavBar = () => {
   return (
     <>
       <Nav>
-        <NavLink to='/'>
-          <img src={Logo} alt='logo' />
-        </NavLink>
         <Bars />
         <NavMenu>
+        <NavLink to='/home' activeStyle>
+            Home
+          </NavLink>
+          <NavLink to='/about' activeStyle>
+            About
+          </NavLink>
+          <NavLink to='/contact' activeStyle>
+            Contact
+          </NavLink>
           <NavLink to='/signUp' activeStyle>
             SignUp
           </NavLink>
-          <NavLink to='/resetPassword' activeStyle>
-            Reset Password
-          </NavLink>
-          {/* Second Nav */}
-          {/* <NavBtnLink to='/sign-in'>Sign In</NavBtnLink> */}
         </NavMenu>
         <NavBtn>
           <NavBtnLink to='/login'>Sign In</NavBtnLink>

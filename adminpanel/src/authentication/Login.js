@@ -1,43 +1,46 @@
 /* eslint-disable no-undef */
 import React, { useState } from 'react';
-import {Container, CssBaseline, Avatar, Typography, FormControlLabel, 
-    Button, Checkbox, Grid, Link, makeStyles, Card, CardContent} from '@material-ui/core';
+import { Container, CssBaseline, Avatar, Typography, FormControlLabel, Button, Checkbox, Grid, makeStyles, Card, CardContent} from '@material-ui/core';
 //import {Height, LockRounded} from '@material-ui/icons';
-import {ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
+import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import fire from '../helpers/db';
-import {ToastContainer, toast} from 'react-toastify';
-import {ScaleLoader} from 'react-spinners';
+import { ToastContainer, toast } from 'react-toastify';
+import { ScaleLoader } from 'react-spinners';
 import Logo from "../images/adminlogo.png";
 import { InputAdornment } from "@material-ui/core";
 import { AiFillMail } from "react-icons/ai";
 import { AiFillLock } from "react-icons/ai";
+import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
+import Resetpassword from './Resetpassword';
 
 
 
 
-export default function Login (props)  {
+export default function Login(props) {
     const classes = useStyles();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [rememberme, setRememberMe] = useState(false);
     const [loading, setLoading] = useState(false);
     const [isLoginDisabled, setIsLoginDisabled] = useState(true);
+    const [toggleForm, setToggleForm] = useState(true);
+    const formMode = () => {
+        setToggleForm(!toggleForm);
+    }
 
-
-  
     const validateEmail = text => /@/.test(text);
 
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
     const validateForm = () => {
         setIsLoginDisabled(password.length < 8 || !validateEmail(email));
-      }
+    }
 
-      
+
     React.useEffect(() => {
         validateForm();
-      }, [email, password, validateForm]);
-    
+    }, [email, password, validateForm]);
+
     const override = `
         display: block;
         margin-left: 100px;
@@ -46,7 +49,7 @@ export default function Login (props)  {
 
 
     //setting const values onchange
-    const handleEmail= (event) =>{
+    const handleEmail = (event) => {
         setEmail(event.target.value);
     }
 
@@ -55,7 +58,7 @@ export default function Login (props)  {
     }
 
 
-    
+
 
     const handleCheck = (event) => {
         setRememberMe(event.target.checked);
@@ -66,7 +69,7 @@ export default function Login (props)  {
         fire.auth()
             .signInWithEmailAndPassword(email, password)
             .then(response => {
-                const {user} =  response;
+                const { user } = response;
                 const data = {
                     userId: user.uid,
                     email: user.email
@@ -84,58 +87,58 @@ export default function Login (props)  {
     }
 
     return (
-        <Container component="main" maxWidth="xs" style={{ height: '100%', width:'100%' }}>
+        <Container component="main" maxWidth="xs" style={{ height: '100%', width: '100%' }}>
             <Card className={classes.card}>
                 <CardContent>
-                    <ToastContainer/>
-                    <CssBaseline/>
+                    <ToastContainer />
+                    <CssBaseline />
                     <div className={classes.paper}>
-                        
-                           <img src={Logo} alt="logo" className={classes.avatar}/>
-                      
+
+                        <img src={Logo} alt="logo" className={classes.avatar} />
+
                         <Typography component="h1" variant="h5">
                             Resto Panel
                         </Typography>
-                        <ValidatorForm 
+                        <ValidatorForm
                             onSubmit={handlerLogin}
                             onError={errors => {
                                 for (const err of errors) {
-                                  console.log(err.props.errorMessages[0])
+                                    console.log(err.props.errorMessages[0])
                                 }
+                            }}
+                            className={classes.form}>
+                            <TextValidator
+                                variant="outlined"
+                                margin="normal"
+                                fullWidth
+                                label="Email"
+                                InputProps={{
+                                    startAdornment: (
+                                        <InputAdornment position="start">
+                                            <AiFillMail />
+                                        </InputAdornment>
+                                    ),
                                 }}
-                                className={classes.form}>
-                        <TextValidator 
-                         variant="outlined"
-                         margin="normal"
-                         fullWidth
-                         label="Email"
-                         InputProps={{
-                            startAdornment: (
-                              <InputAdornment position="start">
-                                <AiFillMail />
-                              </InputAdornment>
-                            ),
-                          }}
 
-                         onChange={handleEmail}
-                         name="email"
-                         
-                         value={email}
-                         validators={['required', 'isEmail']}
-                         errorMessages={['this field is required', 'email is not valid']}
-                         autoComplete='off' />
+                                onChange={handleEmail}
+                                name="email"
 
-                          <TextValidator
+                                value={email}
+                                validators={['required', 'isEmail']}
+                                errorMessages={['this field is required', 'email is not valid']}
+                                autoComplete='off' />
+
+                            <TextValidator
                                 variant="outlined"
                                 fullWidth
                                 label="Password"
                                 InputProps={{
                                     startAdornment: (
-                                      <InputAdornment position="start">
-                                        <AiFillLock />
-                                      </InputAdornment>
+                                        <InputAdornment position="start">
+                                            <AiFillLock />
+                                        </InputAdornment>
                                     ),
-                                  }}
+                                }}
                                 onChange={handlePassword}
                                 name="password"
                                 type="password"
@@ -144,42 +147,38 @@ export default function Login (props)  {
                                 errorMessages={['this field is required']}
                                 autoComplete="off"
                             />
-                        <FormControlLabel
-                            control={<Checkbox value={rememberme} onChange={(e) => handleCheck(e)}  color="primary" />}
-                            label="Remember me"
-                        />
-                        {loading ? (
-                            <ScaleLoader
-                            css={override}
-                            size={150}
-                            color={"#eb4034"}
-                            loading={loading}/>
-                        ) : (
-                             <Button
-                             type="submit"
-                             fullWidth
-                             variant="contained"
-                             className={classes.submit}
-                             disabled={isLoginDisabled}
+                            <FormControlLabel
+                                control={<Checkbox value={rememberme} onChange={(e) => handleCheck(e)} color="primary" />}
+                                label="Remember me"
+                            />
+                            {loading ? (
+                                <ScaleLoader
+                                    css={override}
+                                    size={150}
+                                    color={"#eb4034"}
+                                    loading={loading} />
+                            ) : (
+                                <Button
+                                    type="submit"
+                                    fullWidth
+                                    variant="contained"
+                                    className={classes.submit}
+                                    disabled={isLoginDisabled}
 
-                         >
-                             Sign In
-                         </Button>
-                        )}
-                        
-                            <Grid container>
-                                <Grid item>
-                                    <Link  onClick={props.toggle} className={classes.pointer} variant="body2">
-                                        {"Don't have an account? Create an account"}
-                                    </Link>
-                                    <br></br>
-                                    <Link  onClick={props.toggle} className={classes.pointer} variant="body2">
-                                        {"Forgot password"}
-                                    </Link>
-                                    
+                                >
+                                    Sign In
+                                </Button>
+                            )}
+                          
+                                <Grid container>
+                                    <Grid item>
+                                        <Link to='/resetPassword' className={classes.pointer} variant="body2">
+                                            {"Forgot password"}
+                                        </Link>
+
+                                    </Grid>
+
                                 </Grid>
-                                
-                            </Grid>
                         </ValidatorForm>
                     </div>
                 </CardContent>
@@ -195,31 +194,31 @@ const useStyles = makeStyles((theme) => ({
         flexDirection: 'column',
         alignItems: 'center',
         color: '#b89c84',
-      },
-      avatar: {
-        width:'40%',
-        height:'40%',
-        marginBottom:20
-        
-      },
-      form: {
+    },
+    avatar: {
+        width: '40%',
+        height: '40%',
+        marginBottom: 20
+
+    },
+    form: {
         width: '100%', // Fix IE 11 issue.
         marginTop: theme.spacing(1),
-      },
-      submit: {
-          background: 'linear-gradient(45deg, #b89c84 30%, #b89c84 90%)',
-          margin: theme.spacing(3, 0, 2),
-          color: '#fff',
-          borderRadius: 50
-      },
-      card: {
-          marginTop: '60px',
-          paddingLeft: '20px',
-          paddingRight: '20px',
-          paddingBottom: '20px',
-      },
-      pointer: {
-          cursor: 'pointer',
-          color: 'black'
-      }
+    },
+    submit: {
+        background: 'linear-gradient(45deg, #b89c84 30%, #b89c84 90%)',
+        margin: theme.spacing(3, 0, 2),
+        color: '#fff',
+        borderRadius: 50
+    },
+    card: {
+        marginTop: '60px',
+        paddingLeft: '20px',
+        paddingRight: '20px',
+        paddingBottom: '20px',
+    },
+    pointer: {
+        cursor: 'pointer',
+        color: 'black'
+    }
 }));
