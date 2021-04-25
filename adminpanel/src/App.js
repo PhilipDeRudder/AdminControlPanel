@@ -7,6 +7,7 @@ import SignUp from './authentication/SignUp';
 import Resetpassword from './authentication/Resetpassword';
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import LoginNavBar from './layouts/LoginNavBar';
+import ContactUs from './layouts/ContactUs';
 
 function App() {
   const [user, setUser] = useState('');
@@ -37,6 +38,8 @@ function App() {
               <Route path='/login' component={Login} />
               <Route path='/signUp' component={SignUp} />
               <Route path='/resetPassword' component={Resetpassword} />
+              <Route path='/contact' component={ContactUs} />
+
             </Switch>
           </Router>
         </>
