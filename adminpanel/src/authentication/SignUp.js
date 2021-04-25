@@ -219,7 +219,7 @@ export default function SignUp (props) {
                             </Button>
                             <Grid container>
                                 <Grid item>
-                                    <Link onClick={props.toggle} className={classes.pointer} variant="body2">
+                                    <Link to='/login' className={classes.pointer} variant="body2">
                                         {"Already have an account? Sign In"}
                                     </Link>
                                 </Grid>

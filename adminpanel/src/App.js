@@ -20,6 +20,11 @@ function App() {
     const us = data !== null ? JSON.parse(data) : null;
     setUser(us);
   }
+
+   
+  const LoginComponent = () => {
+    return <Login loggedIn={(user) => setUser(user)}/>
+  }
   useEffect(() => {
     userState();
   }, []);
@@ -34,8 +39,8 @@ function App() {
           <Router>
             <LoginNavBar />
             <Switch>
-              <Route path='/' exact component={Login} />
-              <Route path='/login' component={Login} />
+              <Route path='/' exact component={LoginComponent} />
+              <Route path='/login' component={LoginComponent} />
               <Route path='/signUp' component={SignUp} />
               <Route path='/resetPassword' component={Resetpassword} />
               <Route path='/contact' component={ContactUs} />

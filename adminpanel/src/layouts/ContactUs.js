@@ -108,15 +108,8 @@ export default function ContactUs (props) {
                                 variant="contained"
                                 className={classes.submit}
                             >
-                                <p>Create Account</p>
+                                <p>Submit</p>
                             </Button>
-                            <Grid container>
-                                <Grid item>
-                                    <Link onClick={props.toggle} className={classes.pointer} variant="body2">
-                                        {"Already have an account? Sign In"}
-                                    </Link>
-                                </Grid>
-                            </Grid>
                         </ValidatorForm>
                     </div>
                 </CardContent>
