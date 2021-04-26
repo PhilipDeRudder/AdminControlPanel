@@ -17,7 +17,9 @@ export default function Home(props) {
     return (
         <div style={styles.container}>
             <main style={styles.main}>
-
+                <div style={styles.title}>
+                    <text>Restaurant Admin Panel bla bla bla</text>
+                </div>
             </main>
             <footer style={styles.footer}>
 
@@ -31,24 +33,25 @@ export default function Home(props) {
 
 const styles = {
     container: {
-        backgroundPosition: 'center',
-        backgroundSize: 'cover',
-        backgroundRepeat: 'no-repeat',
-        width: '100%',
-        height: '100%'
-    },
-    main: {
         backgroundImage: `url(${background})`,
         backgroundPosition: 'center',
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
         width: '100%',
-        height: '100vh'
+        height: '100vh',
+    },
+    main: {
+       width:'100%',
+       height:'80%'
+
     },
     footer:{
         width:'100%',
         height: '300',
         backgroundColor: 'blue'
         
-    }
+    },
+    title:{
+        color:'white',
+        }
 };
