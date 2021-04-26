@@ -18,7 +18,11 @@ export default function Home(props) {
         <div style={styles.container}>
             <main style={styles.main}>
                 <div style={styles.titleBox}>
-                    <text style={styles.title}>Restaurant Admin Panel bla bla bla</text>
+                    <text style={styles.title}>Restaurant Admin Panel</text>
+                </div>
+
+                <div style={styles.titleBox}>
+                    <text style={styles.text}>Here comes smart text about admin panel chillz billz </text>
                 </div>
             </main>
             <footer style={styles.footer}>
@@ -56,14 +60,28 @@ const styles = {
         position: 'absolute',
         width: 400,
         height:300,
-        marginTop:500,
-        marginLeft: 250
+        marginTop:550,
+        marginLeft: 200
     },
     title: {
         position: 'absolute',
         color: 'white',
-        fontFamily: "simplifica",
+        fontFamily: 'Montserrat',
         fontWeight: 'normal',
         fontSize:50,
+    },
+    text : {
+        position: 'absolute',
+        color: 'white',
+        fontFamily: 'Montserrat',
+        fontWeight: 'normal',
+        fontSize:30,
+    },
+    textBox : {
+        position: 'absolute',
+        width: 500,
+        height:200,
+        marginTop:570,
+        marginLeft: 900
     }
 }
