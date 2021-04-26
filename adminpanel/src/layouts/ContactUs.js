@@ -1,6 +1,6 @@
 
 import React, { useEffect, useState } from 'react';
-import {  Container, CssBaseline, Typography, Button, Grid, Link, makeStyles, Card, CardContent} from '@material-ui/core';
+import { Container, CssBaseline, Typography, Button, Grid, Link, makeStyles, Card, CardContent } from '@material-ui/core';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import fire from '../helpers/db';
 import { ToastContainer, toast } from 'react-toastify';
@@ -15,7 +15,7 @@ import emailjs from 'emailjs-com';
 
 
 
-export default function ContactUs (props) {
+export default function ContactUs(props) {
     const classes = useStyles();
     const [email, setEmail] = useState('');
 
@@ -23,11 +23,9 @@ export default function ContactUs (props) {
 
     const currentuser = fire.auth().currentUser;
     const db = app.firestore();
-    
 
-    const handleForm = () => {
 
-    }
+
 
     const handleEmail = (event) => {
         setEmail(event.target.value);
@@ -38,19 +36,19 @@ export default function ContactUs (props) {
         setFullname(event.target.value);
     }
 
-    const sendEmail =(e) =>{
+    const sendEmail = (e) => {
         e.preventDefault();
-        emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', e.target, 'YOUR_USER_ID')
-        .then((result) => {
-            console.log(result.text);
-        }, (error) => {
-            console.log(error.text);
-        });
+        emailjs.sendForm('service_agb5rln', 'template_oewm1v7', e.target, 'user_oVCV0IlK8um5LoaQURWlQ')
+            .then((result) => {
+                console.log(result.text);
+            }, (error) => {
+                console.log(error.text);
+            });
     }
 
 
     useEffect(() => {
-       
+
     }, [])
 
     return (
@@ -60,13 +58,13 @@ export default function ContactUs (props) {
                     <ToastContainer />
                     <CssBaseline />
                     <div className={classes.paper}>
-                    <img src={Logo} alt="logo" className={classes.avatar}/>
+                        <img src={Logo} alt="logo" className={classes.avatar} />
 
                         <Typography component="h1" variant="h5">
                             Contact Us
                         </Typography>
                         <ValidatorForm
-                            onSubmit={handleForm}
+                            onSubmit={sendEmail}
                             className={classes.form}>
                             <TextValidator
                                 variant="outlined"
@@ -75,20 +73,20 @@ export default function ContactUs (props) {
                                 label="Full name"
                                 InputProps={{
                                     startAdornment: (
-                                      <InputAdornment position="start">
-                                        <FaUserAlt />
-                                      </InputAdornment>
+                                        <InputAdornment position="start">
+                                            <FaUserAlt />
+                                        </InputAdornment>
                                     ),
-                                  }}
+                                }}
 
                                 onChange={handleFullname}
-                                name="Full name"
+                                name="name"
                                 value={fullname}
                                 validators={['required']}
                                 errorMessages={['this field is required']}
                                 autoComplete='off'
                             />
-                            <br/>
+                            <br />
                             <TextValidator
                                 variant="outlined"
                                 margin="normal"
@@ -96,11 +94,11 @@ export default function ContactUs (props) {
                                 label="Email"
                                 InputProps={{
                                     startAdornment: (
-                                      <InputAdornment position="start">
-                                        <AiFillMail />
-                                      </InputAdornment>
+                                        <InputAdornment position="start">
+                                            <AiFillMail />
+                                        </InputAdornment>
                                     ),
-                                  }}
+                                }}
                                 onChange={handleEmail}
                                 name="email"
                                 value={email}
@@ -109,9 +107,11 @@ export default function ContactUs (props) {
                                 autoComplete='off'
                             />
                             <br />
-
+                            <textarea name="message" />                            <br />
+                            <br />
                             <Button
                                 type="submit"
+                                value="Send"
                                 fullWidth
                                 variant="contained"
                                 className={classes.submit}
@@ -135,10 +135,10 @@ const useStyles = makeStyles((theme) => ({
         color: '#b89c84'
     },
     avatar: {
-        width:'40%',
-        height:'40%',
-        marginBottom:20
-        
+        width: '40%',
+        height: '40%',
+        marginBottom: 20
+
     },
     form: {
         width: '100%', // Fix IE 11 issue.
