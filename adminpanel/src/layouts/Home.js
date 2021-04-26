@@ -1,27 +1,54 @@
 /* eslint-disable no-undef */
 import React, { useState } from 'react';
-import { Container} from '@material-ui/core';
+import { Container, CssBaseline, Avatar, Typography, FormControlLabel, Button, Checkbox, Grid, makeStyles, Card, CardContent} from '@material-ui/core';
+import background from '../images/backgroundLogin.png'
 
 
 
 
 export default function Home(props) {
-   
 
 
+    React.useEffect(() => {
+    }, []);
 
 
-
-
-    
 
     return (
-        <Container component="main" maxWidth="xs" style={{ height: '100%', width: '100%' }}>
-            <h1>this is the home page</h1>
-        </Container>
+        <div style={styles.container}>
+            <main style={styles.main}>
+
+            </main>
+            <footer style={styles.footer}>
+
+            </footer>
+
+            
+          
+        </div >
     );
 }
 
-const useStyles = makeStyles((theme) => ({
-    
-}));
+const styles = {
+    container: {
+        backgroundPosition: 'center',
+        backgroundSize: 'cover',
+        backgroundRepeat: 'no-repeat',
+        width: '100%',
+        height: '100%'
+    },
+    main: {
+        backgroundImage: `url(${background})`,
+        backgroundPosition: 'center',
+        backgroundSize: 'cover',
+        backgroundRepeat: 'no-repeat',
+        width: '100%',
+        height: '100vh'
+    },
+    footer:{
+        width:'100%',
+        height: '300',
+        backgroundColor: 'blue'
+        
+    }
+};
