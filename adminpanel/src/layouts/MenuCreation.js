@@ -1,80 +1,124 @@
-import React from 'react';
-import {useState} from "react";
+
+import React, { useState } from 'react';
+import Container from '@material-ui/core/container';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
+import RemoveIcon from '@material-ui/icons/Remove';
+import AddIcon from '@material-ui/icons/Add';
+import SaveIcon from '@material-ui/icons/Save';
 
 
+import { makeStyles } from '@material-ui/core/styles';
 
- const MenuCreation = (props) => {
+const useStyles = makeStyles((theme) => ({
+  root: {
+    '& .MuiTextField-root': {
+      background: 'skyblue',
+      margin: theme.spacing(0.5),
+    },
+    },
+    button: {
+      margin: theme.spacing(0.5),
+  }
+}))
 
-const [inputField, setInputfield] = useState([
-  {lunchName: '', askKitchen: '', allergens:'', availability: '', price:''},
-]);
 
-const handleSubmit = (e) => {
-  e.preventDefault();
-  console.log("InputFields", inputField);
-}
+const MenuCreation =(props) => {
+  const classes = useStyles();
+  const [inputFields, setInputFields] = useState([
+    { lunchName: '', allergenName: '', availability: '', kitchen: '', price: '', },
+  ]);
 
-const handleAddfields = () => {
-  setInputfield([...inputField, {lunchName: '', askKitchen: '', allergens:'', availability:'', price:''}])
-}
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("InputFields", inputFields);
+  };
 
-const handleRemoveFields = (index) => {
-  const values = [...inputField];
-  values.splice(index, 1);
-  setInputfield(values);
-}
+  const handleChangeInput = (index, event ) => {
+    const values = [...inputFields];
+    values[index][event.target.name] = event.target.value;
+    setInputFields(values);
+    }
 
-const handleChangeInput = (index, event) => {
-  const values = [...inputField];
-  values[index][event.target.name] = event.target.value;
-  setInputfield(values);
-  console.log(index, event.target.name)
-}
+    const handleAddFields = () => {
+      setInputFields([...inputFields, {lunchnName: '', allergen: '', kitchen: '', availability: ''  }])
+    }
+    const handleRemoveFields = (index) => {
+      const values = [...inputFields];
+      values.splice(index, 1);
+      setInputFields(values);
+    }
 
   return (
-    <form style={{margin:'50px'}} onSubmit={handleSubmit}>
-    <h1>Days menu</h1>
-    { inputField.map((inputField, index)=>(
-      <div key={index}>
-        <input type="text"
-        name="lunchName"
-        placeholder="Lunch name"
-        value={inputField.lunchName}
-        onChange={event => handleChangeInput(index, event)}/>
-        
-        <select name="allergens"
-         value={inputField.allergens}
-         onChange={event => handleChangeInput(index, event)}>
-           <option>1</option>
-           <option>2</option>
-         </select>
+    <Container>
+      <h1>Menu for the Day</h1>
+      <form className={classes.root} onSubmit={handleSubmit}>
+        {inputFields.map((setInputField, index) => (
+          <diV key={index}>
+            <TextField
+              name="lunchName"
+              label="Lunch Name"
+              variant='filled'
+              value={inputFields.lunchName}
+              onChange={event => handleChangeInput(index, event)}
+            />
+            <TextField
+              name="allergenName"
+              label="Alleregens"
+              variant='filled'
+              value={inputFields.allergen}
+              onChange={event => handleChangeInput(index, event)}
+            />
+            <TextField
+              name="kitchenName"
+              label="Ask from kitchen"
+              variant='filled'
+              value={inputFields.kitchen}
+              onChange={event => handleChangeInput(index, event)}
+            />
+            <TextField
+              name="availability"
+              label="Availability"
+              variant='filled'
+              value={inputFields.availability}
+              onChange={event => handleChangeInput(index, event)}
+            />
+            <TextField
+              name="Price"
+              label="Price"
+              variant='filled'
+              value={inputFields.price}
+              onChange={event => handleChangeInput(index, event)}
+            />
+            <IconButton
+             onClick={() => handleRemoveFields(index)}
+            >
+              <RemoveIcon />
+            </IconButton>
+            <IconButton
+             onClick={() => handleAddFields()}
+            >
+              <AddIcon />
+            </IconButton>
 
-        <input type="text"
-        name="askKitchen"
-        placeholder="Ask from kitchen"
-        value={inputField.askKitchen}
-        onChange={event => handleChangeInput(index, event)} />
+          </diV>
+        )) }
+        <Button 
+        className={classes.button}
+        variant="contained" 
+        color="primary" 
+        type="submit" 
+        endIcon={<SaveIcon>save</SaveIcon>}
+        onClick={handleSubmit}
+        >Save </Button>
         
-        <input type="number"
-        name="availability"
-        placeholder="availability"
-        value={inputField.availability}
-        onChange={event => handleChangeInput(index, event)} />
-        
-        <input type="number"
-        name="Price"
-        placeholder="Price"
-        value={inputField.price}
-        onChange={event => handleChangeInput(index, event)} />
-         
+      </form>
+    </Container>
 
-        <button onClick={() => handleRemoveFields(index)}>remove</button>
-        <button onClick={() => handleAddfields()}>add</button>
-      </div>
-    ))}
-    <button onClick={handleSubmit}>save</button>
-    </form>
   );
 }
+
+
 
 export default MenuCreation;
