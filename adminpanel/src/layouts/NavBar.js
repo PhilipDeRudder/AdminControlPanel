@@ -3,6 +3,7 @@ import { AppBar, Toolbar, IconButton, Typography, Menu, MenuItem, makeStyles } f
 //import classes from '*.module.css';
 import { AccountCircle } from '@material-ui/icons';
 import { DateTimePickerComponent } from '@syncfusion/ej2-react-calendars';
+import MenuCreation from './MenuCreation';
 
 
 const NavBar = (props) => {
@@ -29,7 +30,7 @@ const NavBar = (props) => {
             <AppBar position="static" className={classes.menubackgroud}>
                 <Toolbar>
                     <Typography variant="h6" className={classes.title}>
-                        Admin Pannel
+                        Admin Panel
                 </Typography>
                     {auth && (
                         <div>
@@ -74,8 +75,13 @@ const NavBar = (props) => {
                     step={60}
                     value={dateValue}></DateTimePickerComponent>
             </div>
-        </div>
+            
+                <MenuCreation/>
 
+            
+            
+        </div>
+    
     );
 }
 

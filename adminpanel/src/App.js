@@ -5,6 +5,7 @@ import NavBar from './layouts/NavBar';
 import Login from './authentication/Login';
 import SignUp from './authentication/SignUp';
 
+
 function App() {
   const [user, setUser] = useState('');
   const [toggleForm, setToggleForm] =  useState(true);

@@ -1,21 +1,32 @@
 import React from 'react';
 import {useState} from "react";
-
-
+import fire from '../helpers/db';
+import app from "firebase/app";
+import "firebase/firestore";
 
  const MenuCreation = (props) => {
+  const db = app.firestore();
+
+const saveMenuInFirestore = (Menus) => {
+  db.collection("Testing").doc("Testing").set({
+    Menus
+  });
+}
+
+
 
 const [inputField, setInputfield] = useState([
-  {lunchName: '', askKitchen: '', allergens:'', availability: '', price:''},
+  {lunchName: '', askKitchen: '', allergens:'', availability: '', price:''}
 ]);
 
 const handleSubmit = (e) => {
   e.preventDefault();
+  saveMenuInFirestore(inputField);
   console.log("InputFields", inputField);
 }
 
 const handleAddfields = () => {
-  setInputfield([...inputField, {lunchName: '', askKitchen: '', allergens:'', availability:'', price:''}])
+  setInputfield([...inputField, {lunchName: '', askKitchen: '', allergens:'', availability:'', price:'',}])
 }
 
 const handleRemoveFields = (index) => {
@@ -61,12 +72,12 @@ const handleChangeInput = (index, event) => {
         value={inputField.availability}
         onChange={event => handleChangeInput(index, event)} />
         
-        <input type="number"
+        <input type="text"
         name="Price"
         placeholder="Price"
         value={inputField.price}
         onChange={event => handleChangeInput(index, event)} />
-         
+        
 
         <button onClick={() => handleRemoveFields(index)}>remove</button>
         <button onClick={() => handleAddfields()}>add</button>
