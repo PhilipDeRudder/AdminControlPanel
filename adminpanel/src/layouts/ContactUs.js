@@ -11,14 +11,16 @@ import "firebase/firestore";
 import { InputAdornment } from "@material-ui/core";
 import { FaUserAlt } from "react-icons/fa";
 import { AiFillMail } from "react-icons/ai";
+import { RiMessageFill } from "react-icons/ri";
 import emailjs from 'emailjs-com';
+import TextareaAutosize from 'react-autosize-textarea';
 
 
 
 export default function ContactUs(props) {
     const classes = useStyles();
     const [email, setEmail] = useState('');
-
+    const [message, setMessage] = useState('');
     const [fullname, setFullname] = useState('');
 
     const currentuser = fire.auth().currentUser;
@@ -34,6 +36,10 @@ export default function ContactUs(props) {
 
     const handleFullname = (event) => {
         setFullname(event.target.value);
+    }
+
+    const handleMessage = (event) => {
+        setMessage(event.target.value);
     }
 
     const sendEmail = (e) => {
@@ -107,7 +113,16 @@ export default function ContactUs(props) {
                                 autoComplete='off'
                             />
                             <br />
-                            <textarea name="message" />                            <br />
+                            <h2>Message</h2>
+                            <textarea 
+                                rows={10}
+                                cols={40} 
+                                name="message"
+                                inputStyle={{ fontSize: 36 }}
+                                value={message}
+                                onChange={handleMessage}
+
+                            />
                             <br />
                             <Button
                                 type="submit"
@@ -160,5 +175,9 @@ const useStyles = makeStyles((theme) => ({
     pointer: {
         cursor: 'pointer',
         color: 'black'
+    },
+    textArea: {
+        width: 1000,
+        height: 1000
     }
 }))

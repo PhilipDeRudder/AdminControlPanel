@@ -6,7 +6,7 @@ import {useState} from "react";
  const MenuCreation = (props) => {
 
 const [inputField, setInputfield] = useState([
-  {lunchName: '', askKitchen: '', allergens:'', availability: '', price:''},
+  {lunchName: '', askKitchen: '', allergens:[], availability: '', price:''},
 ]);
 
 const handleSubmit = (e) => {
