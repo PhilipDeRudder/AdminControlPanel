@@ -1,9 +1,6 @@
 
 import React, { useEffect, useState } from 'react';
-import {
-    Container, CssBaseline, Typography,
-    Button, Grid, Link, makeStyles, Card, CardContent
-} from '@material-ui/core';
+import {  Container, CssBaseline, Typography, Button, Grid, Link, makeStyles, Card, CardContent} from '@material-ui/core';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import fire from '../helpers/db';
 import { ToastContainer, toast } from 'react-toastify';
@@ -14,6 +11,7 @@ import "firebase/firestore";
 import { InputAdornment } from "@material-ui/core";
 import { FaUserAlt } from "react-icons/fa";
 import { AiFillMail } from "react-icons/ai";
+import emailjs from 'emailjs-com';
 
 
 
@@ -38,6 +36,16 @@ export default function ContactUs (props) {
 
     const handleFullname = (event) => {
         setFullname(event.target.value);
+    }
+
+    const sendEmail =(e) =>{
+        e.preventDefault();
+        emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', e.target, 'YOUR_USER_ID')
+        .then((result) => {
+            console.log(result.text);
+        }, (error) => {
+            console.log(error.text);
+        });
     }
 
 
