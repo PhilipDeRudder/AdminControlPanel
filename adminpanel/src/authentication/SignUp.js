@@ -8,17 +8,35 @@ import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import fire from '../helpers/db';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Logo from "../images/adminlogo.PNG"
+import Logo from "../images/adminlogo.png";
+import app from "firebase/app";
+import "firebase/firestore";
+import { InputAdornment } from "@material-ui/core";
+import { FaUserAlt } from "react-icons/fa";
+import { AiFillMail } from "react-icons/ai";
+import { AiFillLock } from "react-icons/ai";
+import { MdRestaurant } from "react-icons/md";
 
 
-
-const SignUp = (props) => {
+export default function SignUp (props) {
     const classes = useStyles();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [restaurantname, setRestaurantname] = useState('');
     const [fullname, setFullname] = useState('');
+
+    const currentuser = fire.auth().currentUser;
+    const db = app.firestore();
+    
+
+
+    const createUserInFirestore = (_email, _restaurantName, _fullname) => {
+        db.collection("Users").doc(fire.auth().currentUser.uid).set({
+            _email,_restaurantName, _fullname
+        });
+
+    }
 
     const handleEmail = (event) => {
         setEmail(event.target.value);
@@ -45,8 +63,7 @@ const SignUp = (props) => {
                 if (response) {
                     props.toggle();
                     toast.success('User Registered Successfully');
-
-
+                    createUserInFirestore(email,restaurantname, fullname, currentuser.uid)
                     // write users ID into the firestore 
                 }
             }).catch((error) => {
@@ -76,6 +93,7 @@ const SignUp = (props) => {
             ValidatorForm.removeValidationRule('isPasswordMatch');
         }
     }, [password])
+
     return (
         <Container component="main" maxWidth="xs">
             <Card className={classes.card}>
@@ -86,7 +104,7 @@ const SignUp = (props) => {
                     <img src={Logo} alt="logo" className={classes.avatar}/>
 
                         <Typography component="h1" variant="h5">
-                            Sign Up
+                            Register
                         </Typography>
                         <ValidatorForm
                             onSubmit={handleSignUp}
@@ -96,6 +114,14 @@ const SignUp = (props) => {
                                 margin="normal"
                                 fullWidth
                                 label="Full name"
+                                InputProps={{
+                                    startAdornment: (
+                                      <InputAdornment position="start">
+                                        <FaUserAlt />
+                                      </InputAdornment>
+                                    ),
+                                  }}
+
                                 onChange={handleFullname}
                                 name="Full name"
                                 value={fullname}
@@ -109,6 +135,13 @@ const SignUp = (props) => {
                                 margin="normal"
                                 fullWidth
                                 label="Email"
+                                InputProps={{
+                                    startAdornment: (
+                                      <InputAdornment position="start">
+                                        <AiFillMail />
+                                      </InputAdornment>
+                                    ),
+                                  }}
                                 onChange={handleEmail}
                                 name="email"
                                 value={email}
@@ -122,6 +155,13 @@ const SignUp = (props) => {
                                 margin="normal"
                                 fullWidth
                                 label="Restaurant name"
+                                InputProps={{
+                                    startAdornment: (
+                                      <InputAdornment position="start">
+                                        <MdRestaurant />
+                                      </InputAdornment>
+                                    ),
+                                  }}
                                 onChange={handleRestaurantName}
                                 name="Restaurant name"
                                 value={restaurantname}
@@ -134,6 +174,13 @@ const SignUp = (props) => {
                                 variant="outlined"
                                 fullWidth
                                 label="Password"
+                                InputProps={{
+                                    startAdornment: (
+                                      <InputAdornment position="start">
+                                        <AiFillLock />
+                                      </InputAdornment>
+                                    ),
+                                  }}
                                 onChange={handlePassword}
                                 name="password"
                                 type="password"
@@ -146,6 +193,13 @@ const SignUp = (props) => {
                             <TextValidator
                                 variant="outlined"
                                 label="Confirm password"
+                                InputProps={{
+                                    startAdornment: (
+                                      <InputAdornment position="start">
+                                        <AiFillLock />
+                                      </InputAdornment>
+                                    ),
+                                  }}
                                 fullWidth
                                 onChange={handleConfirmPassowerd}
                                 name="confirmPassword"
@@ -161,11 +215,11 @@ const SignUp = (props) => {
                                 variant="contained"
                                 className={classes.submit}
                             >
-                                Sign Up
+                                <p>Create Account</p>
                             </Button>
                             <Grid container>
                                 <Grid item>
-                                    <Link onClick={props.toggle} className={classes.pointer} variant="body2">
+                                    <Link to='/login' className={classes.pointer} variant="body2">
                                         {"Already have an account? Sign In"}
                                     </Link>
                                 </Grid>
@@ -184,6 +238,7 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
+        color: '#b89c84'
     },
     avatar: {
         width:'40%',
@@ -196,7 +251,7 @@ const useStyles = makeStyles((theme) => ({
         marginTop: theme.spacing(1),
     },
     submit: {
-        background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
+        background: 'linear-gradient(45deg, #b89c84 30%, #b89c84 90%)',
         margin: theme.spacing(3, 0, 2),
         color: '#fff',
         borderRadius: 50
@@ -213,4 +268,3 @@ const useStyles = makeStyles((theme) => ({
         color: 'black'
     }
 }))
-export default SignUp;

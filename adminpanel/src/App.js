@@ -1,13 +1,17 @@
-  
+
 import { useEffect, useState } from 'react';
 import './App.css';
 import NavBar from './layouts/NavBar';
 import Login from './authentication/Login';
 import SignUp from './authentication/SignUp';
+import Resetpassword from './authentication/Resetpassword';
+import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
+import LoginNavBar from './layouts/LoginNavBar';
+import ContactUs from './layouts/ContactUs';
 
 function App() {
   const [user, setUser] = useState('');
-  const [toggleForm, setToggleForm] =  useState(true);
+  const [toggleForm, setToggleForm] = useState(true);
   const formMode = () => {
     setToggleForm(!toggleForm);
   }
@@ -16,23 +20,36 @@ function App() {
     const us = data !== null ? JSON.parse(data) : null;
     setUser(us);
   }
+
+   
+  const LoginComponent = () => {
+    return <Login loggedIn={(user) => setUser(user)}/>
+  }
   useEffect(() => {
     userState();
   }, []);
   return (
     <>
-    {user !== null ? (
-      <>
-      <NavBar setUserState={() => setUser(null)}/>
-      </>
-    ) : (
-       <>
-       {toggleForm ? (<Login loggedIn={(user) => setUser(user)} toggle={() => formMode()}/>) 
-       : ( <SignUp toggle={() => formMode()}/>)}
-      
-   </>
-    )} 
-  </>
+      {user !== null ? (
+        <>
+          <NavBar setUserState={() => setUser(null)} />
+        </>
+      ) : (
+        <>
+          <Router>
+            <LoginNavBar />
+            <Switch>
+              <Route path='/' exact component={LoginComponent} />
+              <Route path='/login' component={LoginComponent} />
+              <Route path='/signUp' component={SignUp} />
+              <Route path='/resetPassword' component={Resetpassword} />
+              <Route path='/contact' component={ContactUs} />
+
+            </Switch>
+          </Router>
+        </>
+      )}
+    </>
   );
 }
 
