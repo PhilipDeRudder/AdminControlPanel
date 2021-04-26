@@ -75,12 +75,14 @@ const NavBar = (props) => {
                     step={60}
                     value={dateValue}></DateTimePickerComponent>
             </div>
-            
-                <MenuCreation/>
+            <div>
+                <MenuCreation></MenuCreation>
+            </div>
+        </div>
 
             
             
-        </div>
+        
     
     );
 }

@@ -8,7 +8,7 @@ import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import fire from '../helpers/db';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Logo from "../images/adminlogo.PNG";
+import Logo from "../images/adminlogo.png";
 import app from "firebase/app";
 import "firebase/firestore";
 import { InputAdornment } from "@material-ui/core";
@@ -219,7 +219,7 @@ export default function SignUp (props) {
                             </Button>
                             <Grid container>
                                 <Grid item>
-                                    <Link onClick={props.toggle} className={classes.pointer} variant="body2">
+                                    <Link to='/login' className={classes.pointer} variant="body2">
                                         {"Already have an account? Sign In"}
                                     </Link>
                                 </Grid>
