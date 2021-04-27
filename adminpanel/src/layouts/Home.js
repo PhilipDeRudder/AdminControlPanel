@@ -97,9 +97,9 @@ const styles = {
     },
     iconBox: {
         position: 'absolute',
-        width: 600,
+        width: 700,
         height: 100,
-        marginTop: 800,
+        marginTop: 750,
         marginLeft: '25%',
         backgroundColor:'white',
         display: 'flex',

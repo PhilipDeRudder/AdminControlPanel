@@ -80,7 +80,7 @@ export default function Login(props) {
                 props.loggedIn(loggedInUser);
                 setLoading(false);
             }).catch(error => {
-                toast.error(error.message);
+                toast.error("Login failed. Invalid username or password");
                 setLoading(false);
             });
 
