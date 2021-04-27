@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import {
     Container, CssBaseline, Typography,
-    Button, Grid, Link, makeStyles, Card, CardContent
+    Button, Grid, makeStyles, Card, CardContent
 } from '@material-ui/core';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import fire from '../helpers/db';
@@ -16,6 +16,7 @@ import { FaUserAlt } from "react-icons/fa";
 import { AiFillMail } from "react-icons/ai";
 import { AiFillLock } from "react-icons/ai";
 import { MdRestaurant } from "react-icons/md";
+import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 
 
 export default function SignUp (props) {
