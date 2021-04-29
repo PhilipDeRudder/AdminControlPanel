@@ -65,16 +65,7 @@ const NavBar = (props) => {
                     )}
                 </Toolbar>
             </AppBar>
-            <div style={{
-                width: 500, height: 50, marginTop: 20, marginLeft: 500
-            }}>
-                <DateTimePickerComponent
-                    id="datetimepicker"
-                    placeholder="Choose a date and time"
-                    format="dd-MMM-yy HH:mm"
-                    step={60}
-                    value={dateValue}></DateTimePickerComponent>
-            </div>
+  
             <div>
                 <MenuCreation></MenuCreation>
             </div>

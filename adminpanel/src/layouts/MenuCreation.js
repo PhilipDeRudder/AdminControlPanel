@@ -7,6 +7,7 @@ import IconButton from '@material-ui/core/IconButton';
 import RemoveIcon from '@material-ui/icons/Remove';
 import AddIcon from '@material-ui/icons/Add';
 import SaveIcon from '@material-ui/icons/Save';
+import { DateTimePickerComponent } from '@syncfusion/ej2-react-calendars';
 
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -17,41 +18,52 @@ const useStyles = makeStyles((theme) => ({
       background: 'skyblue',
       margin: theme.spacing(0.5),
     },
-    },
-    button: {
-      margin: theme.spacing(0.5),
+  },
+  button: {
+    margin: theme.spacing(0.5),
   }
 }))
 
 
-const MenuCreation =(props) => {
+const MenuCreation = (props) => {
   const classes = useStyles();
   const [inputFields, setInputFields] = useState([
     { lunchName: '', allergenName: '', availability: '', kitchen: '', price: '', },
   ]);
+  const [dateValue, setdateValue] = useState(null)
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("InputFields", inputFields);
   };
 
-  const handleChangeInput = (index, event ) => {
+  const handleChangeInput = (index, event) => {
     const values = [...inputFields];
     values[index][event.target.name] = event.target.value;
     setInputFields(values);
-    }
+  }
 
-    const handleAddFields = () => {
-      setInputFields([...inputFields, {lunchnName: '', allergen: '', kitchen: '', availability: ''  }])
-    }
-    const handleRemoveFields = (index) => {
-      const values = [...inputFields];
-      values.splice(index, 1);
-      setInputFields(values);
-    }
+  const handleAddFields = () => {
+    setInputFields([...inputFields, { lunchnName: '', allergen: '', kitchen: '', availability: '' }])
+  }
+  const handleRemoveFields = (index) => {
+    const values = [...inputFields];
+    values.splice(index, 1);
+    setInputFields(values);
+  }
 
   return (
     <Container>
+      <div style={{
+        width: 500, height: 50, marginTop: 20, marginLeft: 500
+      }}>
+        <DateTimePickerComponent
+          id="datetimepicker"
+          placeholder="Choose a date and time"
+          format="dd-MMM-yy HH:mm"
+          step={60}
+          value={dateValue}></DateTimePickerComponent>
+      </div>
       <h1>Menu for the Day</h1>
       <form className={classes.root} onSubmit={handleSubmit}>
         {inputFields.map((setInputField, index) => (
@@ -92,27 +104,27 @@ const MenuCreation =(props) => {
               onChange={event => handleChangeInput(index, event)}
             />
             <IconButton
-             onClick={() => handleRemoveFields(index)}
+              onClick={() => handleRemoveFields(index)}
             >
               <RemoveIcon />
             </IconButton>
             <IconButton
-             onClick={() => handleAddFields()}
+              onClick={() => handleAddFields()}
             >
               <AddIcon />
             </IconButton>
 
           </diV>
-        )) }
-        <Button 
-        className={classes.button}
-        variant="contained" 
-        color="primary" 
-        type="submit" 
-        endIcon={<SaveIcon>save</SaveIcon>}
-        onClick={handleSubmit}
+        ))}
+        <Button
+          className={classes.button}
+          variant="contained"
+          color="primary"
+          type="submit"
+          endIcon={<SaveIcon>save</SaveIcon>}
+          onClick={handleSubmit}
         >Save </Button>
-        
+
       </form>
     </Container>
 
