@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
 const MenuCreation =(props) => {
   const classes = useStyles();
   const [inputFields, setInputFields] = useState([
-    { lunchName: '', allergenName: '', availability: '', kitchen: '', price: '', },
+    {lunchName: '', askKitchen: '', allergens:[], availability: '', price:'', timeserved1:'',timeserved2:''},
   ]);
 
   const handleSubmit = (e) => {
@@ -42,7 +42,7 @@ const MenuCreation =(props) => {
     }
 
     const handleAddFields = () => {
-      setInputFields([...inputFields, {lunchnName: '', allergen: '', kitchen: '', availability: ''  }])
+      setInputFields([...inputFields, {lunchName: '', askKitchen: '', allergens:[], availability: '', price:'', timeserved1:'',timeserved2:''}])
     }
     const handleRemoveFields = (index) => {
       const values = [...inputFields];
@@ -82,6 +82,21 @@ const MenuCreation =(props) => {
               label="Availability"
               variant='filled'
               value={inputFields.availability}
+              onChange={event => handleChangeInput(index, event)}
+            />
+
+            <TextField
+              name="Serving start time"
+              label="timeserved1"
+              variant='filled'
+              value={inputFields.timeserved1}
+              onChange={event => handleChangeInput(index, event)}
+            />
+             <TextField
+              name="Serving end time"
+              label="timeserved2"
+              variant='filled'
+              value={inputFields.timeserved1}
               onChange={event => handleChangeInput(index, event)}
             />
             <TextField
