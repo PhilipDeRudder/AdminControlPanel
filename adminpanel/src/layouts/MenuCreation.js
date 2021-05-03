@@ -12,6 +12,8 @@ import Calendar from 'react-calendar';
 import fire from '../helpers/db';
 import app from "firebase/app";
 import "firebase/firestore";
+import TimePicker from 'react-time-picker';
+
 
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -31,21 +33,21 @@ const useStyles = makeStyles((theme) => ({
 const MenuCreation = (props) => {
   const classes = useStyles();
   const [inputFields, setInputFields] = useState([
-    {lunchName: '', askKitchen: '', allergens:'', Price:'', timeserved1:'',timeserved2:''},
+    { lunchName: '', askKitchen: '', allergens: '', Price: '', timeserved1: '', timeserved2: '' },
   ]);
   const [date, setDate] = useState(new Date());
 
 
   const db = app.firestore();
 
-const saveMenuInFirestore = (Menus) => {
-  db.collection("Users").doc(fire.auth().currentUser.uid).collection("menus").doc(date.toDateString()).set({
-    Menus
-  });
-}
+  const saveMenuInFirestore = (Menus) => {
+    db.collection("Users").doc(fire.auth().currentUser.uid).collection("menus").doc(date.toDateString()).set({
+      Menus
+    });
+  }
 
 
-  const updateDate = date =>{
+  const updateDate = date => {
     setDate(date);
     console.log(date)
   }
@@ -55,7 +57,7 @@ const saveMenuInFirestore = (Menus) => {
     setDate(value);
     console.log("time test:")
     console.log(e.target.value)
-    }
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -69,19 +71,19 @@ const saveMenuInFirestore = (Menus) => {
     setInputFields(values);
   }
 
-    const handleAddFields = () => {
-      setInputFields([...inputFields, {lunchName: '', allergens: '', askKitchen: '', Price: '', timeserved1:'',timeserved2:'' }])
-    }
-    const handleRemoveFields = (index) => {
-      const values = [...inputFields];
-      values.splice(index, 1);
-      setInputFields(values);
-    }
+  const handleAddFields = () => {
+    setInputFields([...inputFields, { lunchName: '', allergens: '', askKitchen: '', Price: '', timeserved1: '', timeserved2: '' }])
+  }
+  const handleRemoveFields = (index) => {
+    const values = [...inputFields];
+    values.splice(index, 1);
+    setInputFields(values);
+  }
 
   return (
     <Container>
       <div style={{
-        width: 500, height: 50, marginTop: 20, marginLeft: 500
+        width: 300, height: 50, marginTop: 20, marginLeft: 300
       }}>
 
         <DateTimePickerComponent
@@ -118,20 +120,47 @@ const saveMenuInFirestore = (Menus) => {
               value={inputFields.kitchen}
               onChange={event => handleChangeInput(index, event)}
             />
+
             <TextField
+             style={{
+              width: 100
+            }}
               name="timeserved1"
+              id="time"
               label="Serving start time"
-              variant='filled'
+              type="time"
+              defaultValue="07:30"
               value={inputFields.timeserved1}
               onChange={event => handleChangeInput(index, event)}
+              className={classes.textField}
+              InputLabelProps={{
+                shrink: true,
+              }}
+              inputProps={{
+                step: 300, // 5 min
+              }}
             />
-             <TextField
+
+            <TextField
+              style={{
+                width: 100
+              }}
               name="timeserved2"
+              id="time"
               label="Serving end time"
-              variant='filled'
+              type="time"
+              defaultValue="12:00"
               value={inputFields.timeserved2}
               onChange={event => handleChangeInput(index, event)}
+              className={classes.textField}
+              InputLabelProps={{
+                shrink: true,
+              }}
+              inputProps={{
+                step: 300, // 5 min
+              }}
             />
+
             <TextField
               name="Price"
               label="Price"
@@ -144,14 +173,14 @@ const saveMenuInFirestore = (Menus) => {
             >
               <RemoveIcon />
             </IconButton>
-            
-          </diV>
-        ))}
-        <IconButton
+            <IconButton
               onClick={() => handleAddFields()}
             >
               <AddIcon />
             </IconButton>
+          </diV>
+        ))}
+
 
         <Button
           className={classes.button}
