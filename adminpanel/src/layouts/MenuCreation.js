@@ -39,6 +39,13 @@ const MenuCreation = (props) => {
     console.log(date)
   }
 
+  const updatest = (e) => {
+    const value = e.target.value;
+    setDate(value);
+    console.log("time test:")
+    console.log(e.target.value)
+    }
+
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("InputFields", inputFields);
@@ -71,7 +78,7 @@ const MenuCreation = (props) => {
           placeholder="Choose a date and time"
           format="dd-MMM-yy"
           step={60}
-          onChange={updateDate}
+          onChange={updatest}
           value={date}></DateTimePickerComponent>
       </div>
       <h1>Menu for the Day</h1>
