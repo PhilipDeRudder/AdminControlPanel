@@ -8,6 +8,7 @@ import Resetpassword from './authentication/Resetpassword';
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import LoginNavBar from './layouts/LoginNavBar';
 import ContactUs from './layouts/ContactUs';
+import Home from './layouts/Home';
 
 
 function App() {
@@ -38,9 +39,9 @@ function App() {
       ) : (
         <>
           <Router>
-            <LoginNavBar />
+            <LoginNavBar/>
             <Switch>
-              <Route path='/' exact component={LoginComponent} />
+              <Route path='/home' exact component={Home}/>
               <Route path='/login' component={LoginComponent} />
               <Route path='/signUp' component={SignUp} />
               <Route path='/resetPassword' component={Resetpassword} />

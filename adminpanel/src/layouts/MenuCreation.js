@@ -7,9 +7,9 @@ import IconButton from '@material-ui/core/IconButton';
 import RemoveIcon from '@material-ui/icons/Remove';
 import AddIcon from '@material-ui/icons/Add';
 import SaveIcon from '@material-ui/icons/Save';
-import fire from '../helpers/db';
-import app from "firebase/app";
-import "firebase/firestore";
+import { DateTimePickerComponent } from '@syncfusion/ej2-react-calendars';
+import Calendar from 'react-calendar';
+
 
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -19,28 +19,25 @@ const useStyles = makeStyles((theme) => ({
       background: 'skyblue',
       margin: theme.spacing(0.5),
     },
-    },
-    button: {
-      margin: theme.spacing(0.5),
+  },
+  button: {
+    margin: theme.spacing(0.5),
   }
 }))
 
 
-const db = app.firestore();
-
-const saveMenuInFirestore = (Menus) => {
-  db.collection("Testing").doc("Testing").set({
-    Menus
-  });
-}
-
-
-
-const MenuCreation =(props) => {
+const MenuCreation = (props) => {
   const classes = useStyles();
   const [inputFields, setInputFields] = useState([
-    { lunchName: '', allergenName: '', availability: '', askKitchen: '', Price: '', },
+    {lunchName: '', askKitchen: '', allergens:[], availability: '', price:'', timeserved1:'',timeserved2:''},
   ]);
+
+  const [date, setDate] = useState(new Date());
+
+  const updateDate = date =>{
+    setDate(date);
+    console.log(date)
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -48,11 +45,11 @@ const MenuCreation =(props) => {
     console.log("InputFields", inputFields);
   };
 
-  const handleChangeInput = (index, event ) => {
+  const handleChangeInput = (index, event) => {
     const values = [...inputFields];
     values[index][event.target.name] = event.target.value;
     setInputFields(values);
-    }
+  }
 
     const handleAddFields = () => {
       setInputFields([...inputFields, {lunchName: '', allergen: '', askKitchen: '', availability: '', Price: '' }])
@@ -65,7 +62,20 @@ const MenuCreation =(props) => {
 
   return (
     <Container>
+      <div style={{
+        width: 500, height: 50, marginTop: 20, marginLeft: 500
+      }}>
+
+        <DateTimePickerComponent
+          id="datetimepicker"
+          placeholder="Choose a date and time"
+          format="dd-MMM-yy"
+          step={60}
+          onChange={updateDate}
+          value={date}></DateTimePickerComponent>
+      </div>
       <h1>Menu for the Day</h1>
+      <h2>{date.toString()}</h2>
       <form className={classes.root} onSubmit={handleSubmit}>
         {inputFields.map((setInputField, index) => (
           <diV key={index}>
@@ -97,6 +107,21 @@ const MenuCreation =(props) => {
               value={inputFields.availability}
               onChange={event => handleChangeInput(index, event)}
             />
+
+            <TextField
+              name="Serving start time"
+              label="timeserved1"
+              variant='filled'
+              value={inputFields.timeserved1}
+              onChange={event => handleChangeInput(index, event)}
+            />
+             <TextField
+              name="Serving end time"
+              label="timeserved2"
+              variant='filled'
+              value={inputFields.timeserved1}
+              onChange={event => handleChangeInput(index, event)}
+            />
             <TextField
               name="Price"
               label="Price"
@@ -105,28 +130,27 @@ const MenuCreation =(props) => {
               onChange={event => handleChangeInput(index, event)}
             />
             <IconButton
-             onClick={() => handleRemoveFields(index)}
+              onClick={() => handleRemoveFields(index)}
             >
               <RemoveIcon />
             </IconButton>
-            
-
-          </diV>
-        )) }
-        <IconButton
-             onClick={() => handleAddFields()}
+            <IconButton
+              onClick={() => handleAddFields()}
             >
               <AddIcon />
             </IconButton>
-        <Button 
-        className={classes.button}
-        variant="contained" 
-        color="primary" 
-        type="submit" 
-        endIcon={<SaveIcon>save</SaveIcon>}
-        onClick={handleSubmit}
+
+          </diV>
+        ))}
+        <Button
+          className={classes.button}
+          variant="contained"
+          color="primary"
+          type="submit"
+          endIcon={<SaveIcon>save</SaveIcon>}
+          onClick={handleSubmit}
         >Save </Button>
-        
+
       </form>
     </Container>
 

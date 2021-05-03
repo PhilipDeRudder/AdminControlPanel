@@ -1,9 +1,6 @@
 
 import React, { useEffect, useState } from 'react';
-import {
-    Container, CssBaseline, Typography,
-    Button, Grid, Link, makeStyles, Card, CardContent
-} from '@material-ui/core';
+import { Container, CssBaseline, Typography, Button, Grid, Link, makeStyles, Card, CardContent } from '@material-ui/core';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import fire from '../helpers/db';
 import { ToastContainer, toast } from 'react-toastify';
@@ -14,22 +11,23 @@ import "firebase/firestore";
 import { InputAdornment } from "@material-ui/core";
 import { FaUserAlt } from "react-icons/fa";
 import { AiFillMail } from "react-icons/ai";
+import { RiMessageFill } from "react-icons/ri";
+import emailjs from 'emailjs-com';
+import TextareaAutosize from 'react-autosize-textarea';
 
 
 
-export default function ContactUs (props) {
+export default function ContactUs(props) {
     const classes = useStyles();
     const [email, setEmail] = useState('');
-
+    const [message, setMessage] = useState('');
     const [fullname, setFullname] = useState('');
 
     const currentuser = fire.auth().currentUser;
     const db = app.firestore();
-    
 
-    const handleForm = () => {
 
-    }
+
 
     const handleEmail = (event) => {
         setEmail(event.target.value);
@@ -40,9 +38,23 @@ export default function ContactUs (props) {
         setFullname(event.target.value);
     }
 
+    const handleMessage = (event) => {
+        setMessage(event.target.value);
+    }
+
+    const sendEmail = (e) => {
+        e.preventDefault();
+        emailjs.sendForm('service_agb5rln', 'template_oewm1v7', e.target, 'user_oVCV0IlK8um5LoaQURWlQ')
+            .then((result) => {
+                console.log(result.text);
+            }, (error) => {
+                console.log(error.text);
+            });
+    }
+
 
     useEffect(() => {
-       
+
     }, [])
 
     return (
@@ -52,13 +64,13 @@ export default function ContactUs (props) {
                     <ToastContainer />
                     <CssBaseline />
                     <div className={classes.paper}>
-                    <img src={Logo} alt="logo" className={classes.avatar}/>
+                        <img src={Logo} alt="logo" className={classes.avatar} />
 
                         <Typography component="h1" variant="h5">
                             Contact Us
                         </Typography>
                         <ValidatorForm
-                            onSubmit={handleForm}
+                            onSubmit={sendEmail}
                             className={classes.form}>
                             <TextValidator
                                 variant="outlined"
@@ -67,20 +79,20 @@ export default function ContactUs (props) {
                                 label="Full name"
                                 InputProps={{
                                     startAdornment: (
-                                      <InputAdornment position="start">
-                                        <FaUserAlt />
-                                      </InputAdornment>
+                                        <InputAdornment position="start">
+                                            <FaUserAlt />
+                                        </InputAdornment>
                                     ),
-                                  }}
+                                }}
 
                                 onChange={handleFullname}
-                                name="Full name"
+                                name="name"
                                 value={fullname}
                                 validators={['required']}
                                 errorMessages={['this field is required']}
                                 autoComplete='off'
                             />
-                            <br/>
+                            <br />
                             <TextValidator
                                 variant="outlined"
                                 margin="normal"
@@ -88,11 +100,11 @@ export default function ContactUs (props) {
                                 label="Email"
                                 InputProps={{
                                     startAdornment: (
-                                      <InputAdornment position="start">
-                                        <AiFillMail />
-                                      </InputAdornment>
+                                        <InputAdornment position="start">
+                                            <AiFillMail />
+                                        </InputAdornment>
                                     ),
-                                  }}
+                                }}
                                 onChange={handleEmail}
                                 name="email"
                                 value={email}
@@ -101,9 +113,20 @@ export default function ContactUs (props) {
                                 autoComplete='off'
                             />
                             <br />
+                            <h2>Message</h2>
+                            <textarea 
+                                rows={10}
+                                cols={40} 
+                                name="message"
+                                inputStyle={{ fontSize: 36 }}
+                                value={message}
+                                onChange={handleMessage}
 
+                            />
+                            <br />
                             <Button
                                 type="submit"
+                                value="Send"
                                 fullWidth
                                 variant="contained"
                                 className={classes.submit}
@@ -127,10 +150,10 @@ const useStyles = makeStyles((theme) => ({
         color: '#b89c84'
     },
     avatar: {
-        width:'40%',
-        height:'40%',
-        marginBottom:20
-        
+        width: '40%',
+        height: '40%',
+        marginBottom: 20
+
     },
     form: {
         width: '100%', // Fix IE 11 issue.
@@ -152,5 +175,9 @@ const useStyles = makeStyles((theme) => ({
     pointer: {
         cursor: 'pointer',
         color: 'black'
+    },
+    textArea: {
+        width: 1000,
+        height: 1000
     }
 }))

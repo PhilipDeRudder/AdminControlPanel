@@ -1,15 +1,16 @@
 /* eslint-disable no-undef */
 import React, { useState } from 'react';
-import {
-    Container, CssBaseline, Avatar, Typography, FormControlLabel,
-    Button, Checkbox, Grid, Link, makeStyles, Card, CardContent
-} from '@material-ui/core';
+import {Container, CssBaseline, Avatar, Typography, FormControlLabel,Button, Checkbox, Grid, makeStyles, Card, CardContent} from '@material-ui/core';
 //import {Height, LockRounded} from '@material-ui/icons';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import fire from '../helpers/db';
 import { ToastContainer, toast } from 'react-toastify';
 import { ScaleLoader } from 'react-spinners';
 import Lock from "../images/lock.jpg";
+import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
+import { InputAdornment } from "@material-ui/core";
+import { AiFillMail } from "react-icons/ai";
+
 
 
 export default function Resetpassword(props) {
@@ -85,6 +86,14 @@ export default function Resetpassword(props) {
                                 margin="normal"
                                 fullWidth
                                 label="Email"
+                                InputProps={{
+                                    startAdornment: (
+                                        <InputAdornment position="start">
+                                            <AiFillMail />
+                                        </InputAdornment>
+                                    ),
+                                }}
+
                                 onChange={handleEmail}
                                 name="email"
                                 value={email}
@@ -145,7 +154,7 @@ const useStyles = makeStyles((theme) => ({
         marginTop: theme.spacing(1),
     },
     submit: {
-        background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
+        background: 'linear-gradient(45deg, #b89c84 30%, #b89c84 90%)',
         margin: theme.spacing(3, 0, 2),
         color: '#fff',
         borderRadius: 50
