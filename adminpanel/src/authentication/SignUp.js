@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-undef */
 
 import React, { useEffect, useState } from 'react';
 import {
@@ -11,7 +12,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import Logo from "../images/adminlogo.png";
 import app from "firebase/app";
 import "firebase/firestore";
-import { InputAdornment } from "@material-ui/core";
+import { InputAdornment} from "@material-ui/core";
+import {  Avatar, FormControlLabel, Checkbox} from '@material-ui/core';
 import { FaUserAlt } from "react-icons/fa";
 import { AiFillMail } from "react-icons/ai";
 import { AiFillLock } from "react-icons/ai";
@@ -19,25 +21,32 @@ import { MdRestaurant } from "react-icons/md";
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 
 
-export default function SignUp (props) {
+export default function SignUp(props) {
     const classes = useStyles();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [restaurantname, setRestaurantname] = useState('');
     const [fullname, setFullname] = useState('');
+    const [termsConditions, settermsConditions] = useState(false);
 
     const currentuser = fire.auth().currentUser;
     const db = app.firestore();
-    
+
 
 
     const createUserInFirestore = (_email, _restaurantName, _fullname) => {
         db.collection("Users").doc(fire.auth().currentUser.uid).set({
-            _email,_restaurantName, _fullname
+            _email, _restaurantName, _fullname
         });
 
     }
+
+
+    const handleCheck = (event) => {
+        settermsConditions(event.target.checked);
+    }
+    const error = [termsConditions].filter((v) => v).length !== 1;
 
     const handleEmail = (event) => {
         setEmail(event.target.value);
@@ -64,7 +73,7 @@ export default function SignUp (props) {
             .createUserWithEmailAndPassword(email, password)
             .then(response => {
                 if (response) {
-                    createUserInFirestore(email,restaurantname, fullname, currentuser.uid);
+                    createUserInFirestore(email, restaurantname, fullname, currentuser.uid);
                     toast.success('User Registered Successfully');
                     // write users ID into the firestore 
                 }
@@ -120,7 +129,7 @@ export default function SignUp (props) {
                     <ToastContainer />
                     <CssBaseline />
                     <div className={classes.paper}>
-                    <img src={Logo} alt="logo" className={classes.avatar}/>
+                        <img src={Logo} alt="logo" className={classes.avatar} />
 
                         <Typography component="h1" variant="h5">
                             Register
@@ -135,21 +144,21 @@ export default function SignUp (props) {
                                 label="Full name"
                                 InputProps={{
                                     startAdornment: (
-                                      <InputAdornment position="start">
-                                        <FaUserAlt />
-                                      </InputAdornment>
+                                        <InputAdornment position="start">
+                                            <FaUserAlt />
+                                        </InputAdornment>
                                     ),
-                                  }}
+                                }}
 
                                 onChange={handleFullname}
                                 name="Full name"
                                 value={fullname}
                                 type="text"
-                                validators={['required','containsNumber']}
+                                validators={['required', 'containsNumber']}
                                 errorMessages={['this field is required', "cannot contain a number"]}
                                 autoComplete='off'
                             />
-                            <br/>
+                            <br />
                             <TextValidator
                                 variant="outlined"
                                 margin="normal"
@@ -157,11 +166,11 @@ export default function SignUp (props) {
                                 label="Email"
                                 InputProps={{
                                     startAdornment: (
-                                      <InputAdornment position="start">
-                                        <AiFillMail />
-                                      </InputAdornment>
+                                        <InputAdornment position="start">
+                                            <AiFillMail />
+                                        </InputAdornment>
                                     ),
-                                  }}
+                                }}
                                 onChange={handleEmail}
                                 name="email"
                                 value={email}
@@ -177,11 +186,11 @@ export default function SignUp (props) {
                                 label="Restaurant name"
                                 InputProps={{
                                     startAdornment: (
-                                      <InputAdornment position="start">
-                                        <MdRestaurant />
-                                      </InputAdornment>
+                                        <InputAdornment position="start">
+                                            <MdRestaurant />
+                                        </InputAdornment>
                                     ),
-                                  }}
+                                }}
                                 onChange={handleRestaurantName}
                                 name="Restaurant name"
                                 value={restaurantname}
@@ -189,18 +198,18 @@ export default function SignUp (props) {
                                 errorMessages={['this field is required', 'Maximum character exceeded']}
                                 autoComplete='off'
                             />
-                            <br/>
+                            <br />
                             <TextValidator
                                 variant="outlined"
                                 fullWidth
                                 label="Password"
                                 InputProps={{
                                     startAdornment: (
-                                      <InputAdornment position="start">
-                                        <AiFillLock />
-                                      </InputAdornment>
+                                        <InputAdornment position="start">
+                                            <AiFillLock />
+                                        </InputAdornment>
                                     ),
-                                  }}
+                                }}
                                 onChange={handlePassword}
                                 name="password"
                                 type="password"
@@ -215,11 +224,11 @@ export default function SignUp (props) {
                                 label="Confirm password"
                                 InputProps={{
                                     startAdornment: (
-                                      <InputAdornment position="start">
-                                        <AiFillLock />
-                                      </InputAdornment>
+                                        <InputAdornment position="start">
+                                            <AiFillLock />
+                                        </InputAdornment>
                                     ),
-                                  }}
+                                }}
                                 fullWidth
                                 onChange={handleConfirmPassowerd}
                                 name="confirmPassword"
@@ -229,6 +238,17 @@ export default function SignUp (props) {
                                 value={confirmPassword}
                                 autoComplete="off"
                             />
+                      
+
+                                <FormControlLabel
+                                    control={
+                                    <Checkbox
+                                         value={termsConditions} 
+                                    onChange={(e) => handleCheck(e)} color="primary" 
+                                    required={true}/>}
+                                    label="i've read the terms and conditions"
+                                />
+                            
                             <Button
                                 type="submit"
                                 fullWidth
@@ -261,10 +281,10 @@ const useStyles = makeStyles((theme) => ({
         color: '#b89c84'
     },
     avatar: {
-        width:'40%',
-        height:'40%',
-        marginBottom:20
-        
+        width: '40%',
+        height: '40%',
+        marginBottom: 20
+
     },
     form: {
         width: '100%', // Fix IE 11 issue.
