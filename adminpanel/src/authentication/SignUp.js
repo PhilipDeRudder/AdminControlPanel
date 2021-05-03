@@ -62,9 +62,9 @@ export default function SignUp (props) {
             .createUserWithEmailAndPassword(email, password)
             .then(response => {
                 if (response) {
+                    createUserInFirestore(email,restaurantname, fullname, currentuser.uid);
                     props.toggle();
                     toast.success('User Registered Successfully');
-                    createUserInFirestore(email,restaurantname, fullname, currentuser.uid)
                     // write users ID into the firestore 
                 }
             }).catch((error) => {

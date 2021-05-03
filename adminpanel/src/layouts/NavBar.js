@@ -12,7 +12,6 @@ const NavBar = (props) => {
     const [auth, setauth] = React.useState(true);
     const [anchorEl, setanchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
-    const [dateValue, setdateValue] = useState(null)
 
 
     const handleMenu = (event) => {

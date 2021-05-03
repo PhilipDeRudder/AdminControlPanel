@@ -8,6 +8,7 @@ import RemoveIcon from '@material-ui/icons/Remove';
 import AddIcon from '@material-ui/icons/Add';
 import SaveIcon from '@material-ui/icons/Save';
 import { DateTimePickerComponent } from '@syncfusion/ej2-react-calendars';
+import Calendar from 'react-calendar';
 
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -30,7 +31,13 @@ const MenuCreation = (props) => {
   const [inputFields, setInputFields] = useState([
     { lunchName: '', allergenName: '', availability: '', kitchen: '', price: '', },
   ]);
-  const [dateValue, setdateValue] = useState(null)
+
+  const [date, setDate] = useState(new Date());
+
+  const updateDate = date =>{
+    setDate(date);
+    console.log(date)
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -43,6 +50,7 @@ const MenuCreation = (props) => {
     setInputFields(values);
   }
 
+ 
   const handleAddFields = () => {
     setInputFields([...inputFields, { lunchnName: '', allergen: '', kitchen: '', availability: '' }])
   }
@@ -57,14 +65,17 @@ const MenuCreation = (props) => {
       <div style={{
         width: 500, height: 50, marginTop: 20, marginLeft: 500
       }}>
+
         <DateTimePickerComponent
           id="datetimepicker"
           placeholder="Choose a date and time"
-          format="dd-MMM-yy HH:mm"
+          format="dd-MMM-yy"
           step={60}
-          value={dateValue}></DateTimePickerComponent>
+          onChange={updateDate}
+          value={date}></DateTimePickerComponent>
       </div>
       <h1>Menu for the Day</h1>
+      <h2>{date.toString()}</h2>
       <form className={classes.root} onSubmit={handleSubmit}>
         {inputFields.map((setInputField, index) => (
           <diV key={index}>
