@@ -57,13 +57,14 @@ export default function SignUp (props) {
         setFullname(event.target.value);
     }
 
+    //in signup add menu collection tab to firestore
+
     const handleSignUp = () => {
         fire.auth()
             .createUserWithEmailAndPassword(email, password)
             .then(response => {
                 if (response) {
                     createUserInFirestore(email,restaurantname, fullname, currentuser.uid);
-                    props.toggle();
                     toast.success('User Registered Successfully');
                     // write users ID into the firestore 
                 }
