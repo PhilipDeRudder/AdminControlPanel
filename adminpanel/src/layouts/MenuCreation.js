@@ -83,7 +83,7 @@ const MenuCreation = (props) => {
   return (
     <Container>
       <div style={{
-        width: 500, height: 50, marginTop: 20, marginLeft: 500
+        width: 300, height: 50, marginTop: 20, marginLeft: 300
       }}>
 
         <DateTimePickerComponent
@@ -154,7 +154,7 @@ const MenuCreation = (props) => {
                 step: 300, // 5 min
               }}
             />
-           
+
             <TextField
               name="Price"
               label="Price"
@@ -167,14 +167,14 @@ const MenuCreation = (props) => {
             >
               <RemoveIcon />
             </IconButton>
-
+            <IconButton
+              onClick={() => handleAddFields()}
+            >
+              <AddIcon />
+            </IconButton>
           </diV>
         ))}
-        <IconButton
-          onClick={() => handleAddFields()}
-        >
-          <AddIcon />
-        </IconButton>
+
 
         <Button
           className={classes.button}
