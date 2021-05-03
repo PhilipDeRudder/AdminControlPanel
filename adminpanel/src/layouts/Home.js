@@ -4,7 +4,6 @@ import { Container, CssBaseline, Avatar, Typography, FormControlLabel, Button, C
 import background from '../images/backgroundlarge.png'
 import fast from '../images/clock.png';
 import easy from '../images/easy-to-use.png';
-import backbottom from '../images/backbottom.png';
 
 
 
