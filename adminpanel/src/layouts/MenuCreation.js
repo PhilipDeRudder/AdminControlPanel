@@ -31,14 +31,14 @@ const useStyles = makeStyles((theme) => ({
 const MenuCreation = (props) => {
   const classes = useStyles();
   const [inputFields, setInputFields] = useState([
-    {lunchName: '', askKitchen: '', allergens:[], availability: '', price:'', timeserved1:'',timeserved2:''},
+    {lunchName: '', askKitchen: '', allergens:'', Price:'', timeserved1:'',timeserved2:''},
   ]);
 
 
   const db = app.firestore();
 
 const saveMenuInFirestore = (Menus) => {
-  db.collection("Testing").doc("Testing").set({
+  db.collection("Users").doc(fire.auth().currentUser.uid).collection("menus").doc('date').set({
     Menus
   });
 }
@@ -63,7 +63,7 @@ const saveMenuInFirestore = (Menus) => {
   }
 
     const handleAddFields = () => {
-      setInputFields([...inputFields, {lunchName: '', allergen: '', askKitchen: '', price: '', timeserved1:'',timeserved2:'' }])
+      setInputFields([...inputFields, {lunchName: '', allergens: '', askKitchen: '', Price: '', timeserved1:'',timeserved2:'' }])
     }
     const handleRemoveFields = (index) => {
       const values = [...inputFields];
@@ -98,7 +98,7 @@ const saveMenuInFirestore = (Menus) => {
               onChange={event => handleChangeInput(index, event)}
             />
             <TextField
-              name="allergenName"
+              name="allergens"
               label="Alleregens"
               variant='filled'
               value={inputFields.allergen}
@@ -129,7 +129,7 @@ const saveMenuInFirestore = (Menus) => {
               name="Price"
               label="Price"
               variant='filled'
-              value={inputFields.price}
+              value={inputFields.Price}
               onChange={event => handleChangeInput(index, event)}
             />
             <IconButton
@@ -137,14 +137,15 @@ const saveMenuInFirestore = (Menus) => {
             >
               <RemoveIcon />
             </IconButton>
-            <IconButton
+            
+          </diV>
+        ))}
+        <IconButton
               onClick={() => handleAddFields()}
             >
               <AddIcon />
             </IconButton>
 
-          </diV>
-        ))}
         <Button
           className={classes.button}
           variant="contained"
