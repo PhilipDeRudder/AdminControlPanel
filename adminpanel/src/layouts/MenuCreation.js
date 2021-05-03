@@ -9,7 +9,9 @@ import AddIcon from '@material-ui/icons/Add';
 import SaveIcon from '@material-ui/icons/Save';
 import { DateTimePickerComponent } from '@syncfusion/ej2-react-calendars';
 import Calendar from 'react-calendar';
-
+import fire from '../helpers/db';
+import app from "firebase/app";
+import "firebase/firestore";
 
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -32,6 +34,15 @@ const MenuCreation = (props) => {
     {lunchName: '', askKitchen: '', allergens:[], availability: '', price:'', timeserved1:'',timeserved2:''},
   ]);
 
+
+  const db = app.firestore();
+
+const saveMenuInFirestore = (Menus) => {
+  db.collection("Testing").doc("Testing").set({
+    Menus
+  });
+}
+
   const [date, setDate] = useState(new Date());
 
   const updateDate = date =>{
@@ -52,7 +63,7 @@ const MenuCreation = (props) => {
   }
 
     const handleAddFields = () => {
-      setInputFields([...inputFields, {lunchName: '', allergen: '', askKitchen: '', availability: '', Price: '' }])
+      setInputFields([...inputFields, {lunchName: '', allergen: '', askKitchen: '', price: '', timeserved1:'',timeserved2:'' }])
     }
     const handleRemoveFields = (index) => {
       const values = [...inputFields];
@@ -101,25 +112,17 @@ const MenuCreation = (props) => {
               onChange={event => handleChangeInput(index, event)}
             />
             <TextField
-              name="availability"
-              label="Availability"
-              variant='filled'
-              value={inputFields.availability}
-              onChange={event => handleChangeInput(index, event)}
-            />
-
-            <TextField
-              name="Serving start time"
-              label="timeserved1"
+              name="timeserved1"
+              label="Serving start time"
               variant='filled'
               value={inputFields.timeserved1}
               onChange={event => handleChangeInput(index, event)}
             />
              <TextField
-              name="Serving end time"
-              label="timeserved2"
+              name="timeserved2"
+              label="Serving end time"
               variant='filled'
-              value={inputFields.timeserved1}
+              value={inputFields.timeserved2}
               onChange={event => handleChangeInput(index, event)}
             />
             <TextField
