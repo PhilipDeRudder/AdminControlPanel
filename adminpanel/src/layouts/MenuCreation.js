@@ -7,7 +7,9 @@ import IconButton from '@material-ui/core/IconButton';
 import RemoveIcon from '@material-ui/icons/Remove';
 import AddIcon from '@material-ui/icons/Add';
 import SaveIcon from '@material-ui/icons/Save';
-
+import fire from '../helpers/db';
+import app from "firebase/app";
+import "firebase/firestore";
 
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -24,14 +26,25 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 
+const db = app.firestore();
+
+const saveMenuInFirestore = (Menus) => {
+  db.collection("Testing").doc("Testing").set({
+    Menus
+  });
+}
+
+
+
 const MenuCreation =(props) => {
   const classes = useStyles();
   const [inputFields, setInputFields] = useState([
-    { lunchName: '', allergenName: '', availability: '', kitchen: '', price: '', },
+    { lunchName: '', allergenName: '', availability: '', askKitchen: '', Price: '', },
   ]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    saveMenuInFirestore(inputFields);
     console.log("InputFields", inputFields);
   };
 
@@ -42,7 +55,7 @@ const MenuCreation =(props) => {
     }
 
     const handleAddFields = () => {
-      setInputFields([...inputFields, {lunchnName: '', allergen: '', kitchen: '', availability: ''  }])
+      setInputFields([...inputFields, {lunchName: '', allergen: '', askKitchen: '', availability: '', Price: '' }])
     }
     const handleRemoveFields = (index) => {
       const values = [...inputFields];
@@ -71,7 +84,7 @@ const MenuCreation =(props) => {
               onChange={event => handleChangeInput(index, event)}
             />
             <TextField
-              name="kitchenName"
+              name="askKitchen"
               label="Ask from kitchen"
               variant='filled'
               value={inputFields.kitchen}
@@ -96,14 +109,15 @@ const MenuCreation =(props) => {
             >
               <RemoveIcon />
             </IconButton>
-            <IconButton
+            
+
+          </diV>
+        )) }
+        <IconButton
              onClick={() => handleAddFields()}
             >
               <AddIcon />
             </IconButton>
-
-          </diV>
-        )) }
         <Button 
         className={classes.button}
         variant="contained" 
