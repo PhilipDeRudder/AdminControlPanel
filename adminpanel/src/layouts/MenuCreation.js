@@ -33,17 +33,17 @@ const MenuCreation = (props) => {
   const [inputFields, setInputFields] = useState([
     {lunchName: '', askKitchen: '', allergens:'', Price:'', timeserved1:'',timeserved2:''},
   ]);
+  const [date, setDate] = useState(new Date());
 
 
   const db = app.firestore();
 
 const saveMenuInFirestore = (Menus) => {
-  db.collection("Users").doc(fire.auth().currentUser.uid).collection("menus").doc('date').set({
+  db.collection("Users").doc(fire.auth().currentUser.uid).collection("menus").doc(date.toDateString()).set({
     Menus
   });
 }
 
-  const [date, setDate] = useState(new Date());
 
   const updateDate = date =>{
     setDate(date);
