@@ -82,7 +82,7 @@ const MenuCreation = (props) => {
           value={date}></DateTimePickerComponent>
       </div>
       <h1>Menu for the Day</h1>
-      <h2>{date.toString()}</h2>
+      <h2>{date.toLocaleDateString()}</h2>
       <form className={classes.root} onSubmit={handleSubmit}>
         {inputFields.map((setInputField, index) => (
           <diV key={index}>
