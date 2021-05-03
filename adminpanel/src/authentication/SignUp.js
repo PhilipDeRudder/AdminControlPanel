@@ -91,8 +91,25 @@ export default function SignUp (props) {
             }
             return true;
         });
+
+        ValidatorForm.addValidationRule('lengthName', (value) => {
+            if (value.length > 30) {
+                return false;
+            }
+            return true;
+        });
+        ValidatorForm.addValidationRule('containsNumber', (value) => {
+            const regex = /\d/;
+            if (regex.test(value)) {
+                return false;
+            }
+            return true;
+        });
+
         return () => {
             ValidatorForm.removeValidationRule('isPasswordMatch');
+            ValidatorForm.removeValidationRule('lengthName');
+
         }
     }, [password])
 
@@ -127,8 +144,9 @@ export default function SignUp (props) {
                                 onChange={handleFullname}
                                 name="Full name"
                                 value={fullname}
-                                validators={['required']}
-                                errorMessages={['this field is required']}
+                                type="text"
+                                validators={['required','containsNumber']}
+                                errorMessages={['this field is required', "cannot contain a number"]}
                                 autoComplete='off'
                             />
                             <br/>
@@ -167,8 +185,8 @@ export default function SignUp (props) {
                                 onChange={handleRestaurantName}
                                 name="Restaurant name"
                                 value={restaurantname}
-                                validators={['required']}
-                                errorMessages={['this field is required']}
+                                validators={['required', 'lengthName']}
+                                errorMessages={['this field is required', 'Maximum character exceeded']}
                                 autoComplete='off'
                             />
                             <br/>
