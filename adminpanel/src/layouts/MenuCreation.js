@@ -122,6 +122,9 @@ const MenuCreation = (props) => {
             />
 
             <TextField
+             style={{
+              width: 100
+            }}
               name="timeserved1"
               id="time"
               label="Serving start time"
@@ -139,6 +142,9 @@ const MenuCreation = (props) => {
             />
 
             <TextField
+              style={{
+                width: 100
+              }}
               name="timeserved2"
               id="time"
               label="Serving end time"
