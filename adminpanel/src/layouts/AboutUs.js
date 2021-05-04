@@ -1,0 +1,104 @@
+/* eslint-disable no-undef */
+import React, { useState } from 'react';
+import { Container, CssBaseline, Avatar, Typography, FormControlLabel, Button, Checkbox, Grid, makeStyles, Card, CardContent } from '@material-ui/core';
+import background from '../images/backgroundlarge.png'
+import fast from '../images/clock.png';
+import easy from '../images/easy-to-use.png';
+
+
+
+export default function AboutUs(props) {
+
+
+    React.useEffect(() => {
+    }, []);
+
+
+
+    return (
+        <div style={styles.container}>
+            <main style={styles.main}>
+                <div style={styles.titleBox}>
+                    <text style={styles.title}>About us</text>
+                </div>
+               
+                
+            </main>
+            <footer style={styles.footer}>
+
+            </footer>
+
+
+
+        </div >
+    );
+}
+
+const styles = {
+    container: {
+        backgroundImage: `url(${background})`,
+        backgroundPosition: 'center',
+        backgroundSize: 'cover',
+        backgroundRepeat: 'no-repeat',
+        width: '100%',
+        height: '130vh',
+    },
+    main: {
+        position: 'relative',
+        width: '100%',
+        height: '80%'
+
+    },
+    footer: {
+        width: '100%',
+        height: '300',
+        backgroundColor: 'blue'
+
+    },
+    titleBox: {
+        position: 'absolute',
+        width: 400,
+        height: 200,
+        marginTop: 600,
+        marginLeft: 200
+    },
+    title: {
+        position: 'absolute',
+        color: 'white',
+        fontFamily: 'Montserrat',
+        fontWeight: 'normal',
+        fontSize: 50,
+        textAlign: 'center'
+
+    },
+    text: {
+        position: 'absolute',
+        color: 'white',
+        fontFamily: 'Montserrat',
+        fontWeight: 'normal',
+        fontSize: 30,
+    },
+    textBox: {
+        position: 'absolute',
+        width: 500,
+        height: 200,
+        marginTop: 630,
+        marginLeft: 900
+    },
+    iconBox: {
+        position: 'absolute',
+        width: 700,
+        height: 100,
+        marginTop: 750,
+        marginLeft: '25%',
+        backgroundColor:'white',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between'
+        
+    },
+    icon: {
+        width: 100,
+        height: 100
+    }
+}
