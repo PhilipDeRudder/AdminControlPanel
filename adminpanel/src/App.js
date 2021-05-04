@@ -41,6 +41,7 @@ function App() {
           <Router>
             <LoginNavBar/>
             <Switch>
+              <Route path='/' exact component={Home}/>
               <Route path='/home' exact component={Home}/>
               <Route path='/login' component={LoginComponent} />
               <Route path='/signUp' component={SignUp} />
