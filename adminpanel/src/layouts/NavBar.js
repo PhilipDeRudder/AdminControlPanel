@@ -26,7 +26,7 @@ const NavBar = (props) => {
 
     return (
         <div className={classes.root}>
-            <AppBar position="static" className={classes.menubackgroud}>
+            <AppBar position="static" className={classes.menubackground}>
                 <Toolbar>
                     <Typography variant="h6" className={classes.title}>
                         Admin Panel
@@ -79,13 +79,15 @@ const NavBar = (props) => {
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        flexGrow: 1
+        flexGrow: 1,
     },
-    menubackground: {
-        background: 'linear-gradient(45deg, #FE6B8B 90%)',
-    },
+     menubackground: {
+         background: 'linear-gradient(45deg, #FE6B8B 90%)',
+
+     },
     title: {
-        flexGrow: 1
+        flexGrow: 1,
+
     }
 }));
 

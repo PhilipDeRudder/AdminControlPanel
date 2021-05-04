@@ -16,9 +16,12 @@ import TimePicker from 'react-time-picker';
 
 
 import { makeStyles } from '@material-ui/core/styles';
+import { Maximize } from '@material-ui/icons';
 
 const useStyles = makeStyles((theme) => ({
   root: {
+    backgroundColor: '#e9e9f1',
+    borderRadius: 10,
     '& .MuiTextField-root': {
       background: 'skyblue',
       margin: theme.spacing(0.5),
@@ -26,7 +29,8 @@ const useStyles = makeStyles((theme) => ({
   },
   button: {
     margin: theme.spacing(0.5),
-  }
+  },
+
 }))
 
 
@@ -83,7 +87,7 @@ const MenuCreation = (props) => {
   return (
     <Container>
       <div style={{
-        width: 300, height: 50, marginTop: 20, marginLeft: 300
+        width: 300, height: 50, marginTop: 20, marginLeft: 300, 
       }}>
 
         <DateTimePickerComponent
@@ -94,11 +98,14 @@ const MenuCreation = (props) => {
           onChange={updatest}
           value={date}></DateTimePickerComponent>
       </div>
-      <h1>Menu for the Day</h1>
-      <h2>{date.toLocaleDateString()}</h2>
+      <div className={classes.root}>
+
+      
+      <h1 style={{margin: 10, fontFamily: 'italic'}}>Menu for the Day</h1>
+      <h2 style={{margin: 10}}>{date.toLocaleDateString()}</h2>
       <form className={classes.root} onSubmit={handleSubmit}>
         {inputFields.map((setInputField, index) => (
-          <diV key={index}>
+          <div key={index}>
             <TextField
               name="lunchName"
               label="Lunch Name"
@@ -108,7 +115,7 @@ const MenuCreation = (props) => {
             />
             <TextField
               name="allergens"
-              label="Alleregens"
+              label="Allergens"
               variant='filled'
               value={inputFields.allergen}
               onChange={event => handleChangeInput(index, event)}
@@ -178,7 +185,7 @@ const MenuCreation = (props) => {
             >
               <AddIcon />
             </IconButton>
-          </diV>
+          </div>
         ))}
 
 
@@ -192,6 +199,7 @@ const MenuCreation = (props) => {
         >Save </Button>
 
       </form>
+      </div>
     </Container>
 
   );
