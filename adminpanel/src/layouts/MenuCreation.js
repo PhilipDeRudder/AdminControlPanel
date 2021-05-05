@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Container from '@material-ui/core/container';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
@@ -16,6 +16,7 @@ import TimePicker from 'react-time-picker';
 
 
 import { makeStyles } from '@material-ui/core/styles';
+import { WhereToVote } from '@material-ui/icons';
 import { Maximize } from '@material-ui/icons';
 
 const useStyles = makeStyles((theme) => ({
@@ -41,6 +42,7 @@ const MenuCreation = (props) => {
   ]);
   const [date, setDate] = useState(new Date());
 
+  const [menus, setMenus] = useState([])
 
   const db = app.firestore();
 
@@ -80,9 +82,27 @@ const MenuCreation = (props) => {
   }
   const handleRemoveFields = (index) => {
     const values = [...inputFields];
+    console.log(values)
     values.splice(index, 1);
+    console.log(values)
     setInputFields(values);
   }
+
+
+  const fetchMenus = async () => {
+    const response = db.collection('Users').doc(fire.auth().currentUser.uid).collection("menus");
+    const data = await response.get(); 
+    data.docs.forEach(item => {
+      if(item.id === date.toDateString()){
+        console.log(item.data())
+        
+      }
+      
+    })
+  }
+  useEffect(() => {
+    fetchMenus();
+  })
 
   return (
     <Container>
@@ -92,7 +112,7 @@ const MenuCreation = (props) => {
 
         <DateTimePickerComponent
           id="datetimepicker"
-          placeholder="Choose a date and time"
+          placeholder="Choose a date"
           format="dd-MMM-yy"
           step={60}
           onChange={updatest}
@@ -129,9 +149,9 @@ const MenuCreation = (props) => {
             />
 
             <TextField
-             style={{
-              width: 100
-            }}
+              style={{
+                width: 100
+              }}
               name="timeserved1"
               id="time"
               label="Serving start time"
@@ -172,6 +192,7 @@ const MenuCreation = (props) => {
               name="Price"
               label="Price"
               variant='filled'
+              type='number'
               value={inputFields.Price}
               onChange={event => handleChangeInput(index, event)}
             />

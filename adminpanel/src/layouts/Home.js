@@ -30,7 +30,7 @@ export default function Home(props) {
                 </div>
                 </div>
                 <div style={styles.textBox}>
-                    <text style={styles.text}>Here comes smart text about admin panel chillz billz </text>
+                    <text style={styles.text}>Here comes small intro text about admin panel  </text>
                 </div>
             </main>
             <footer style={styles.footer}>
@@ -55,7 +55,7 @@ const styles = {
     main: {
         position: 'relative',
         width: '100%',
-        height: '80%'
+        height: '80%',
 
     },
     footer: {
@@ -96,11 +96,10 @@ const styles = {
     },
     iconBox: {
         position: 'absolute',
-        width: 700,
+        width: '60%',
         height: 100,
-        marginTop: 750,
-        marginLeft: '25%',
-        backgroundColor:'white',
+        marginTop: 800,
+        marginLeft: '20%',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between'

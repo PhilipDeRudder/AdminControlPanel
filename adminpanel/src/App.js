@@ -9,6 +9,7 @@ import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import LoginNavBar from './layouts/LoginNavBar';
 import ContactUs from './layouts/ContactUs';
 import Home from './layouts/Home';
+import AboutUs from './layouts/AboutUs';
 
 
 function App() {
@@ -47,7 +48,7 @@ function App() {
               <Route path='/signUp' component={SignUp} />
               <Route path='/resetPassword' component={Resetpassword} />
               <Route path='/contact' component={ContactUs} />
-
+              <Route path='/about' component={AboutUs} />
             </Switch>
           </Router>
         </>
