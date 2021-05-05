@@ -118,6 +118,7 @@ export default function ContactUs(props) {
                                 rows={10}
                                 cols={40} 
                                 name="message"
+                                placeholder="Write a message..."
                                 inputStyle={{ fontSize: 36 }}
                                 value={message}
                                 onChange={handleMessage}
