@@ -2,14 +2,14 @@
 import React, { useState } from 'react';
 import { Container, CssBaseline, Avatar, Typography, FormControlLabel, Button, Checkbox, Grid, makeStyles, Card, CardContent } from '@material-ui/core';
 import background from '../images/backgroundlarge.png'
-import fast from '../images/clock.png';
-import easy from '../images/easy-to-use.png';
+import memberone from '../images/memberone.jpg';
 
 
 
 export default function AboutUs(props) {
 
 
+    const auboutText = '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."'
     React.useEffect(() => {
     }, []);
 
@@ -21,12 +21,24 @@ export default function AboutUs(props) {
                 <div style={styles.titleBox}>
                     <text style={styles.title}>About us</text>
                 </div>
-               
-                
-            </main>
-            <footer style={styles.footer}>
+                <div style={styles.aboutUsbox}>
+                    <text style={styles.textAbout}>{auboutText}</text>
+                </div>
 
-            </footer>
+                <div style={styles.teamTitleBox}>
+                    <text style={styles.title}>Team</text>
+                </div>
+
+                <div style={styles.teamBox}>
+                    <div style={styles.iconBox}>
+                        <img src={memberone} style={styles.icon}></img>
+                        <img src={memberone} style={styles.icon}></img>
+                        <img src={memberone} style={styles.icon}></img>
+
+                    </div>
+                </div>
+
+            </main>
 
 
 
@@ -42,33 +54,22 @@ const styles = {
         backgroundRepeat: 'no-repeat',
         width: '100%',
         height: '130vh',
-    },
-    main: {
-        position: 'relative',
-        width: '100%',
-        height: '80%'
-
-    },
-    footer: {
-        width: '100%',
-        height: '300',
-        backgroundColor: 'blue'
 
     },
     titleBox: {
-        position: 'absolute',
-        width: 400,
+        width: 500,
         height: 200,
-        marginTop: 600,
-        marginLeft: 200
+        margin: 'auto',
+    },
+    main:{
     },
     title: {
         position: 'absolute',
         color: 'white',
         fontFamily: 'Montserrat',
-        fontWeight: 'normal',
-        fontSize: 50,
-        textAlign: 'center'
+        fontWeight: 'bold',
+        fontSize: 100,
+        textAlign: 'center',
 
     },
     text: {
@@ -87,18 +88,39 @@ const styles = {
     },
     iconBox: {
         position: 'absolute',
-        width: 700,
+        width: '80%',
+        marginLeft:'10%',
         height: 100,
-        marginTop: 750,
-        marginLeft: '25%',
-        backgroundColor:'white',
+        margin:'auto',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between'
-        
+
     },
     icon: {
-        width: 100,
-        height: 100
+        width: 200,
+        height: 200,
+        borderRadius: 200 / 2,
+        overflow: "hidden",
+        borderWidth: 3,
+        borderColor: "red"
+    },
+    aboutUsbox: {
+        margin: 'auto',
+        width: 900
+    }
+    ,
+    textAbout: {
+        color: 'white',
+        margin: 'auto',
+        fontFamily: 'Montserrat',
+        fontWeight: 'normal',
+        fontSize: 30,
+    },
+    teamTitleBox: {
+        width: 400,
+        height: 200,
+        margin: 'auto',
+        marginTop: 100
     }
 }

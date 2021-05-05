@@ -78,7 +78,9 @@ const MenuCreation = (props) => {
   }
   const handleRemoveFields = (index) => {
     const values = [...inputFields];
+    console.log(values)
     values.splice(index, 1);
+    console.log(values)
     setInputFields(values);
   }
 
@@ -183,6 +185,7 @@ const MenuCreation = (props) => {
               name="Price"
               label="Price"
               variant='filled'
+              type='number'
               value={inputFields.Price}
               onChange={event => handleChangeInput(index, event)}
             />
