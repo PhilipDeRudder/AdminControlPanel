@@ -246,7 +246,7 @@ export default function SignUp(props) {
                                          value={termsConditions} 
                                     onChange={(e) => handleCheck(e)} color="primary" 
                                     required={true}/>}
-                                    label="i've read the terms and conditions"
+                                    label="I've read the terms and conditions"
                                 />
                             
                             <Button
