@@ -90,15 +90,18 @@ const MenuCreation = (props) => {
 
 
   const fetchMenus = async () => {
-    const response = db.collection('Users').doc(fire.auth().currentUser.uid).collection("menus");
-    const data = await response.get(); 
-    data.docs.forEach(item => {
-      if(item.id === date.toDateString()){
-        console.log(item.data())
+    if(fire.auth().currentUser.uid !== null){
+      const response = db.collection('Users').doc(fire.auth().currentUser.uid).collection("menus");
+      const data = await response.get(); 
+      data.docs.forEach(item => {
+        if(item.id === date.toDateString()){
+          console.log(item.data())
+          
+        }
         
-      }
-      
-    })
+      })
+    }
+   
   }
   useEffect(() => {
     fetchMenus();
