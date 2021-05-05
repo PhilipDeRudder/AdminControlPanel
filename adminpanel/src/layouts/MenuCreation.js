@@ -104,8 +104,6 @@ const MenuCreation = (props) => {
         width: 300, height: 50, marginTop: 20, marginLeft: 300
       }}>
 
-        <Button onClick={() => { fetchMenus() }}>Get menus</Button>
-
         <DateTimePickerComponent
           id="datetimepicker"
           placeholder="Choose a date"
