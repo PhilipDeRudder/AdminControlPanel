@@ -89,7 +89,7 @@ export default function ContactUs(props) {
                                 name="name"
                                 value={fullname}
                                 validators={['required']}
-                                errorMessages={['this field is required']}
+                                errorMessages={['This field is required']}
                                 autoComplete='off'
                             />
                             <br />
@@ -109,7 +109,7 @@ export default function ContactUs(props) {
                                 name="email"
                                 value={email}
                                 validators={['required', 'isEmail']}
-                                errorMessages={['this field is required', 'email is not valid']}
+                                errorMessages={['This field is required', 'Email is not valid']}
                                 autoComplete='off'
                             />
                             <br />

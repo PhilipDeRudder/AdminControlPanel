@@ -155,7 +155,7 @@ export default function SignUp(props) {
                                 value={fullname}
                                 type="text"
                                 validators={['required', 'containsNumber']}
-                                errorMessages={['this field is required', "cannot contain a number"]}
+                                errorMessages={['This field is required', "Cannot contain a number"]}
                                 autoComplete='off'
                             />
                             <br />
@@ -175,7 +175,7 @@ export default function SignUp(props) {
                                 name="email"
                                 value={email}
                                 validators={['required', 'isEmail']}
-                                errorMessages={['this field is required', 'email is not valid']}
+                                errorMessages={['This field is required', 'Email is not valid']}
                                 autoComplete='off'
                             />
                             <br />
@@ -195,7 +195,7 @@ export default function SignUp(props) {
                                 name="Restaurant name"
                                 value={restaurantname}
                                 validators={['required', 'lengthName']}
-                                errorMessages={['this field is required', 'Maximum character exceeded']}
+                                errorMessages={['This field is required', 'Maximum character exceeded']}
                                 autoComplete='off'
                             />
                             <br />
@@ -215,7 +215,7 @@ export default function SignUp(props) {
                                 type="password"
                                 value={password}
                                 validators={['required']}
-                                errorMessages={['this field is required']}
+                                errorMessages={['This field is required']}
                                 autoComplete="off"
                             />
                             <br />
@@ -234,7 +234,7 @@ export default function SignUp(props) {
                                 name="confirmPassword"
                                 type="password"
                                 validators={['isPasswordMatch', 'required']}
-                                errorMessages={['password mismatch', 'this field is required']}
+                                errorMessages={["Passwords don't match", 'This field is required']}
                                 value={confirmPassword}
                                 autoComplete="off"
                             />

@@ -125,7 +125,7 @@ export default function Login(props) {
 
                                 value={email}
                                 validators={['required', 'isEmail']}
-                                errorMessages={['this field is required', 'email is not valid']}
+                                errorMessages={['This field is required', 'Email is not valid']}
                                 autoComplete='off' />
 
                             <TextValidator
@@ -144,7 +144,7 @@ export default function Login(props) {
                                 type="password"
                                 value={password}
                                 validators={['required']}
-                                errorMessages={['this field is required']}
+                                errorMessages={['This field is required']}
                                 autoComplete="off"
                             />
                             <FormControlLabel
