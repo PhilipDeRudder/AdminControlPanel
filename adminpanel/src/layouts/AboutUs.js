@@ -103,7 +103,7 @@ const styles = {
         borderRadius: 200 / 2,
         overflow: "hidden",
         borderWidth: 3,
-        borderColor: "red"
+        borderColor: "white"
     },
     aboutUsbox: {
         margin: 'auto',
@@ -122,5 +122,11 @@ const styles = {
         height: 200,
         margin: 'auto',
         marginTop: 100
+    },
+    teamBox:{
+        position: 'absolute',
+        width: '90%',
+        marginLeft:'10%',
+
     }
 }
