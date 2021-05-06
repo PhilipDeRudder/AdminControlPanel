@@ -30,7 +30,7 @@ export default function Home(props) {
                 </div>
                 </div>
                 <div style={styles.textBox}>
-                    <text style={styles.text}>Here comes small intro text about admin panel  </text>
+                    <text style={styles.text}>Time is money. Wasted time is wasted money! </text>
                 </div>
             </main>
             <footer style={styles.footer}>
